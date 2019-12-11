@@ -1,0 +1,83 @@
+<h2>รายการอะไหล่ในคลัง</h2>
+
+<!-- <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'externals')">อะไหล่ภายนอก</button>
+  <button class="tablinks" onclick="openCity(event, 'internals')">อะไหล่ภายใน</button>
+  <button class="tablinks" onclick="openCity(event, 'electrics')">ระบบไฟฟ้า</button>
+  <button class="tablinks" onclick="openCity(event, 'generals')">อุปกรณ์ทั่วไป</button>
+</div> -->
+
+<!--Externals part-->
+<!-- <div id="externals" class="tabcontent">
+  <h3>อะไหล่ภายนอก</h3>
+ 
+    <ejs-grid #gridView [dataSource]='partData' [searchSettings]='searchSettings'  [allowSorting]='true' [editSettings]='editSettings' [toolbar]='toolbar' height='273px'>
+      <e-columns>
+          <e-column id="code" field='code' headerText='รหัส' textAlign='Right' width=90></e-column>
+          <e-column id="code" field='name' headerText='ชื่อ' width=90></e-column>
+          <e-column id="code" field='brand' headerText='ยี่ห้อ' textAlign='Right' format='C2' width=90></e-column>
+          <e-column id="code" field='version' headerText='รุ่น' textAlign='Right' format='yMd' width=90></e-column>
+          <e-column id="code" field='purchase' headerText='ราคาซื้อ' textAlign='Right' format='yMd' width=90></e-column>
+          <e-column id="code" field='price' headerText='ราคาขาย' textAlign='Right' format='yMd' width=90></e-column>
+          <e-column id="code" field='number_of' headerText='จำนวน' textAlign='Right' format='yMd' width=90></e-column>      
+          <e-column id="code" field='sales' headerText='ยอดขาย' textAlign='Right' format='yMd' width=90></e-column>      
+         </e-columns>
+      </ejs-grid>
+      <div><button (click)="save()">Save</button></div>
+    </div>
+
+<div id="internals" class="tabcontent">
+    <h3>อะไหล่ภายใน</h3>
+    <ejs-grid #gridView [dataSource]='internals' [searchSettings]='searchSettings'  [allowSorting]='true' [editSettings]='editSettings' [toolbar]='toolbar' height='273px'>
+      <e-columns>
+          <e-column id="code" field='code' headerText='รหัส' textAlign='Right' width=90></e-column>
+          <e-column id="code" field='name' headerText='ชื่อ' width=90></e-column>
+          <e-column id="code" field='brand' headerText='ยี่ห้อ' textAlign='Right' format='C2' width=90></e-column>
+          <e-column id="code" field='version' headerText='รุ่น' textAlign='Right' format='yMd' width=90></e-column>
+          <e-column id="code" field='purchase' headerText='ราคาซื้อ' textAlign='Right' format='yMd' width=90></e-column>
+          <e-column id="code" field='price' headerText='ราคาขาย' textAlign='Right' format='yMd' width=90></e-column>
+          <e-column id="code" field='number_of' headerText='จำนวน' textAlign='Right' format='yMd' width=90></e-column>      
+          <e-column id="code" field='sales' headerText='ยอดขาย' textAlign='Right' format='yMd' width=90></e-column>      
+         </e-columns>
+      </ejs-grid>
+      <div><button (click)="save()">Save</button></div>
+
+  </div>
+   -->
+
+
+<!--specify the group of sparepart-->
+<div>
+  <form>
+    เลือกหมวดหมู่อะไหล่:
+    <select id="group" (change)="chooseData()">
+      <option value="internals">อะไหล่ภายใน</option>
+      <option value="electrics">ระบบไฟฟ้า</option>
+      <option value="externals">อะไหล่ภายนอก</option>
+      <option value="generals">อะไหล่ทั่วไป</option>
+    </select>
+  </form>
+
+</div>
+  <!--table of sparepart data--> 
+<div id="tableGrid">
+  <ejs-grid #gridView [dataSource]='partData' [searchSettings]='searchSettings'  (rowSelected)='save($event)'  [allowSorting]='true' [editSettings]='editSettings' [toolbar]='toolbar' height='273px'>
+    <e-columns>
+      
+        <e-column id="code" field='code' headerText='รหัส' textAlign='Center' width=90></e-column>
+        <e-column id="code" field='name' headerText='ชื่อ' width=90></e-column>
+        <e-column id="code" field='brand' headerText='ยี่ห้อ' textAlign='Center' format='C2' width=90></e-column>
+        <e-column id="code" field='version' headerText='รุ่น' textAlign='Center' format='yMd' width=90></e-column>
+        <e-column id="code" field='purchase' headerText='ราคาซื้อ' textAlign='Center'  width=90></e-column>
+        <e-column id="code" field='price' headerText='ราคาขาย' textAlign='Center'   width=90></e-column>
+        <e-column id="code" field='numberOf' headerText='จำนวน' textAlign='Center'   width=90></e-column>      
+        <e-column id="code" field='sales' headerText='ยอดขาย' textAlign='Center'  width=90></e-column>      
+        <!--<e-column headerText='Commands' width=140 [commands]='commands'></e-column>--> 
+      
+      </e-columns>
+    </ejs-grid>
+    <div><button id="saveButton"(click)="update()">Save</button></div>
+</div>
+<!--(rowSelected)='update($event)'-->
+ 
+ 

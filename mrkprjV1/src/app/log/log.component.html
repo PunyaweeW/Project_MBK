@@ -1,0 +1,15 @@
+<div class="w3-container">
+        <h2>ประวัติ</h2>
+        <ejs-grid #gridView [dataSource]='logging' textAlign='Left' height='273px' [searchSettings]='searchSetting' [toolbar]='toolbar' [allowSorting]='true'>
+         <e-columns>
+           
+             <e-column id="code" field='timestamp' headerText='วันและเวลา'   width=90></e-column>
+             <e-column id="code" field='action' headerText='การดำเนินการ' width=90></e-column>
+             
+           
+           </e-columns>
+         </ejs-grid>
+</div>
+      
+
+    

@@ -1,0 +1,54 @@
+<div class="main" igxLayout>
+  <igx-nav-drawer id="navigation" [isOpen]="drawerState.open" [(pin)]="drawerState.pin">
+    <ng-template igxDrawer>
+   
+          <ul class="nav">
+                <li class="menuItem"routerLinkActive="active" *ngFor="let item of navItems" [ngSwitch]="item.text">
+                  <a [routerLink]="[item.path]">
+                       {{item.text}} 
+                       <mat-icon matBadge="{{ null }}"matBadgeOverlap="false"*ngSwitchDefault  >{{item.icon}}</mat-icon> 
+
+                       <mat-icon [id]="[item.text]"   matBadge="{{ notifyNO > 0 ? notifyNO : null }}"matBadgeOverlap="false"  *ngSwitchCase="'Notification'"  >{{item.icon}}</mat-icon> 
+                  </a>
+                </li>
+              </ul>  
+        
+         
+ 
+    <!--  
+        <igx-switch (ngModelChange)="drawer.toggle()"  [(ngModel)]="drawerState.miniTemplate">
+            Mini variant
+        </igx-switch> -->
+     <!-- <app-child></app-child> -->
+    
+    <!-- <button (click)="show()">show</button>-->
+
+     </ng-template>
+
+   <!--  <ng-template igxDrawerMini *ngIf="drawerState.miniTemplate">
+        <nav>
+            <ul class="nav">
+                <li routerLinkActive="active" *ngFor="let item of navItems">
+                  <a [routerLink]="[item.path]">
+                    }<mat-icon>{{item.icon}}</mat-icon>
+                  </a>
+                </li>
+              </ul>
+          
+          <igx-switch (ngModelChange)="drawer.toggle()"  [(ngModel)]="drawerState.miniTemplate">
+         </igx-switch>
+      </nav>
+     
+      </ng-template>
+       -->
+   </igx-nav-drawer>
+  <!--hidden side navigation bar-->
+  <main igxFlex [class.mini-padding]="!drawerState.pin && drawerState.miniTemplate">
+    <span igxButton="icon" igxToggleAction="navigation" (click)="show()">
+      <igx-icon fontSet="material">menu</igx-icon>
+    </span>  
+    <router-outlet></router-outlet>
+  </main>
+ 
+</div>
+ 

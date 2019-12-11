@@ -1,0 +1,114 @@
+  
+<h2>เพิ่มอะไหล่ใหม่</h2>
+<p>กรุณากรอกข้อมูลอะไหล่สำหรับอะไหล่ใหม่ในคลังอะไหล่</p>
+ 
+<div class="container">
+<!-- sparepart registeration form     -->
+  <form   #f="ngForm" (ngSubmit)="onSubmit(f)" ngNativeValidate>
+  <!-- choose group for sparepart-->
+  <div id="row">
+    <div id="col-25" class="form-group">
+      <label for="group">กลุ่มอะไหล่</label>
+    </div>
+  
+      <select id="group" name="group" class="form-control" ngModel>
+        <option value="01" id ="internals">อะไหล่ภายใน</option>
+        <option value="02" id = "electrics">ระบบไฟฟ้า</option>
+        <option value="03" id = "externals">อะไหล่ภายนอก</option>
+        <option value="04" id =  "generals">อะไหล่ทั่วไป</option>
+      </select>    
+ 
+  </div>
+  <!--enter name of sparepart-->
+  <div id="row" class="form-group">
+  
+      <label for="name">ชื่ออะไหล่</label>
+ 
+      <input type="text" id="name" name="name"  class="form-control" placeholder="ชื่ออะไหล่ เช่น ยางนอก ยางใน กระจกหน้า" (change)="updateDropdown()"ngModel  required>
+  
+  </div>
+
+  <!--enter brand of sparepart-->
+  <div id="row" class="form-group" >
+     
+      <label  >ยี่ห้อ</label> 
+      <label for="normalbrand">ทั่วไป</label>
+      <input type="radio"  name="brand" value="normal" (click)="setNormalBrand()"  checked>
+      <select id="normalBrand"  name="normalBrand" class="form-control" [disabled]="notCustomBrand"  ngModel>
+          <option [value]="brand.code" *ngFor="let brand of brandList">{{brand["brand"]}}</option>
+      </select>
+          
+     <label for="customBrand">อื่น ๆ</label><input type="radio" name="brand" value="normal" (click)="setCustomBrand()"  >
+     <input type="text" id= "customBrand" name ="customBrand" class="form-control" [disabled]="customBrand" ngModel>
+       
+   
+  </div>
+
+  <!--enter version of sparepart-->
+  <div id="row" class="form-group">
+  
+      <label for="version">รุ่น (รุ่นของรถ/อะไหล่)</label>
+      <label>รุ่นปกติ</label>
+      <input type="radio"  name="vers" value="normal" (click)="setNormalVersion()"  checked>
+      <select id="normalVersion" name ="normalVersion"class="form-control" [disabled]="notCustomVersion" ngModel>
+        <option [value]="version.code" *ngFor="let version of versionList">{{version.name}}</option>
+    </select>
+    <label>รุ่นอื่นๆ</label>
+      <input type="radio"  name="vers" value="custom" (click)="setCustomVersion()">   
+    <input type="text" id="customVersion" name="customVersion" class="form-control" [disabled]="customVersion" ngModel placeholder="ระบุรุ่นของอะไหล่">
+   
+     <label>ข้อมูลจำเพาะ</label>
+     <label for="version">รุ่น (รุ่นของรถ/อะไหล่)</label>
+     <label>ปกติ</label>
+     <input type="radio"  name="specs" value="normal" (click)="setNormalSpecs()"  checked>
+     <select id="normalSpecs" name ="normalSpecs"class="form-control" [disabled]="notCustomSpecs" ngModel>
+       <option [value]="specs.code" *ngFor="let specs of specificList">{{specs.name}}</option>
+   </select>
+   <label>อื่น ๆ</label>
+     <input type="radio"  name="specs" value="custom" (click)="setCustomSpecs()">   
+   <input type="text" id="customSpecs" name="customSpecs" class="form-control" [disabled]="customSpecs" ngModel placeholder="ระบุข้อมูลจำเพาะ">
+ 
+  </div>
+
+  <!--enter sparepart barcode(optional)-->
+  <div id="row" class="form-group">
+ 
+      <label for="barcode">รหัสแท่ง</label>
+      <input type="text" id="barcode" name="barcode" class="form-control" ngModel placeholder="ระบุรหัสแท่งของอะไหล่">
+ 
+  </div>
+
+  <!--enter purchase price of sparepart-->
+  <div id="row" class="form-group">
+ 
+      <label for="purchase">ราคาซื้อ</label>
+ 
+      <input type="text" id="purchase" name="purchase" class="form-control"placeholder="ระบุราคาซื้อ (บาท)" ngModel required>
+   
+  </div>
+
+  <!--enter price for sale of the sparepart-->
+  <div class="row" class="form-group">
+ 
+      <label for="price">ราคาขาย</label>
+ 
+      <input type="text" id="price" name="price" class="form-control" placeholder="ระบุราคาขาย (บาท)" ngModel required>
+ 
+  </div>
+  <!--enter initial number of that sparepart-->
+  <div id="row" class="form-group">
+    
+      <label for="numberOf">จำนวน</label>
+   
+      <input type="text" id="numberOf" name="numberOf" class="form-control" ngModel placeholder="จำนวนสำหรับการเพิ่มครั้งแรก">
+ 
+  </div>
+  <!--submit the form-->
+     <br>
+    <input type="submit" value="บันทึก"  >
+ 
+  </form>
+
+  <!--(click)="addItem()"-->
+
+</div>

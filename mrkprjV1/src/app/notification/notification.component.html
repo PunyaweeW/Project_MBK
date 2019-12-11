@@ -1,0 +1,14 @@
+<h3>แจ้งเตือนอะไหล่ใกล้หมด</h3>
+<!--Show notifications for part that less than 3 units -->
+<div class="notify" >
+     <mat-card *ngFor="let notification of notifications" [ngClass]="{orange: notification.numberOf == 3, yellow: notification.numberOf == 2 , red: notification.numberOf ==1}">
+     ชื่ออะไหล่: {{notification.name}}<br> ยี่ห้อ: {{notification.brand}} <br> รุ่น: {{notification.version}}  <br> คงเหลือ: {{notification.numberOf}}  <br>
+    <button  class="closebtn" (click)='clearNotification(notification)' onclick="var card = this.parentElement
+    card.style.opacity = '0'; 
+    setTimeout(function(){ card.style.display = 'none'; }, 600);
+  
+    "  >x</button>
+    </mat-card>
+    
+</div>
+ 

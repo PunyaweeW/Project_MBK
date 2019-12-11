@@ -1,0 +1,123 @@
+{
+    "versionList": {
+        
+        "bike":[
+            {"name":"RC","code":"V00"},
+            {"name":"RX","code":"V01"},
+            {"name":"PCS","code":"V02"},
+            {"name":"PCX","code":"V03"},
+            {"name":"CBR","code":"V04"},
+            {"name":"SMASH","code":"V05"},
+            {"name":"DREAM","code":"V06"},
+            {"name":"WAVE","code":"V08"},
+            {"name":"WAVE 100","code":"V09"},
+            {"name":"WAVE 100S","code":"V10"},
+            {"name":"WAVE 110I","code":"V11"},
+            {"name":"WAVE 125","code":"V12"}, 
+            {"name":"SCOOPY I","code":"V13"},
+            {"name":"SCOOPY I 125 NE 2012","code":"V14"},
+            {"name":"CLICK","code":"V15"},
+            {"name":"CLICK 125I","code":"V16"},
+            {"name":"MIO","code":"V17"},
+            {"name":"MIO 115I","code":"V18"},
+            {"name":"12N5 MIO","code":"V19"},
+            {"name":"MSX","code":"V20"},
+            {"name":"RX","code":"V21"},
+            {"name":"FILANO","code":"V22"},
+            {"name":"FIORE","code":"V23"},
+            {"name":"NINJA","code":"V24"},
+            {"name":"NOUVO","code":"V25"},
+            {"name":"NOVA","code":"V26"},
+            {"name":"RX","code":"V27"},
+            {"name":"TEENA","code":"V28"},
+            {"name":"TTX","code":"V29"},
+            {"name":"YTZ","code":"V30"},
+            {"name":"TZ5S","code":"V31"},
+            {"name":"ZOOMER-X","code":"V32"},
+            {"name":"ZM NEW","code":"V33"},
+            {"name":"RX","code":"V34"},
+            {"name":"ทั่วไป","code":"V35"}
+            
+       
+        ], 
+        
+        "generals":[
+            {"name":"แคปซูล การ์ตูน","code":"G00"},
+            {"name":"แคปซูล บาง","code":"G01"},
+            {"name":"ลายคาด","code":"G02"},
+            {"name":"AUTO 0.92 ลิตร + น้ำมันเฟืองท้าย","code":"G03"},
+            {"name":"2T","code":"G04"},
+            {"name":"0.8 ลิตร","code":"G05"},
+            {"name":"1.0 ลิตร","code":"G06"},
+            {"name":"1 0.8 ลิตร","code":"G07"},
+            {"name":"1 1.0 ลิตร","code":"G08"},
+            {"name":"ธรรมดา","code":"G09"},
+            {"name":"เล็ก","code":"G10"},
+            {"name":"กลาง","code":"G11"},
+            {"name":"ใหญ่","code":"G12"},
+            {"name":"การ์ตูน กรอบเหล็ก","code":"G13"},
+            {"name":"ธรรมดา","code":"G14"},
+            {"name":"1 RACING 10W-40 4T","code":"G15"},
+            {"name":"1 RACING 10W-50 4T","code":"G16"}
+            
+        ]
+
+        },
+    
+    "specificList" : {
+     "generic": [
+        {"name":"เกรด AAA","code":"GD0"}
+
+     ],
+     "chain":[
+        {"name":"428-100","code":"CH0"},
+        {"name":"428-104","code":"CH1"},
+        {"name":"428-106","code":"CH2"},
+        {"name":"428-112","code":"CH3"},
+        {"name":"428-120","code":"CH4"}
+  
+     ],
+     "wheel":[
+        {"name":"100/90-12","code":"W00"},
+        {"name":"100/90-14","code":"W01"},
+        {"name":"200-17","code":"W02"},
+        {"name":"225-17","code":"W03"},
+        {"name":"250-17","code":"W04"},
+        {"name":"275-17","code":"W05"},
+        {"name":"70/90-14","code":"W06"},
+        {"name":"80/90-14","code":"W07"},
+        {"name":"90/90-14","code":"W08"},
+        {"name":"70/90-16","code":"W09"},
+        {"name":"140-17 ทองเข้ม","code":"W0A"},
+        {"name":"140-17 ทองอ่อน","code":"W0B"},
+        {"name":"140-17 น้ำเงิน","code":"W0C"}
+ 
+    ],
+    "ster":[
+        {"name":"428 35T","code":"S00"},
+        {"name":"428 14T","code":"S01"}
+ 
+    ],
+    "bearing":[
+        {"name":"6001","code":"B00"},
+        {"name":"6200","code":"B01"},
+        {"name":"6201","code":"B02"},
+        {"name":"6203","code":"B03"},
+        {"name":"6301","code":"B04"}
+ 
+    ],
+    "break":[
+        {"name":"DRUM","code":"BK0"},
+        {"name":"DISC","code":"BK1"},
+        {"name":"แพ็ค 5 คู่","code":"BK2"},
+        {"name":"เดี๋ยว+สปริง","code":"BK3"}
+ 
+    ]
+     
+    
+ 
+     
+    
+    
+    }
+}
