@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   date: String = " "; 
   private interestedPart:any;
   ngOnInit() {
-    this.apiService.readLog().subscribe((logging: logs[])=>{
+ /*    this.apiService.readLog().subscribe((logging: logs[])=>{
       this.logging = logging;
       
  
@@ -45,27 +45,30 @@ export class DashboardComponent implements OnInit {
       let day = Number(dateComp[0]) - Number(today.getDate());
       if(year == 0 && mount ==0 &&day ==0 ){
        this.todayLogging.push(this.logging[i]);
-      } */
+      } 
       }
     });
-  
+   */
     this.apiService.readParts().subscribe((sales : any[])=>{
       this.sales = sales;
       console.log(this.sales)
       var i = 0;
       for(i;i<this.sales.length;i++){
-        if(this.sales[i].groupId == "03"){
-          this.externals.push(this.sales[i]);
+        for(var j = 0; j < this.sales[i].length;j++){
+          if(this.sales[i][j].groupId == "03"){
+            this.externals.push(this.sales[i]);
+          }
+          if(this.sales[i][j].groupId == "01"){
+            this.internals.push(this.sales[i]);
+          }
+          if(this.sales[i][j].groupId == "02"){
+            this.electrics.push(this.sales[i]);
+          }
+          if(this.sales[i][j].groupId == "04"){
+            this.generals.push(this.sales[i]);
+          }
         }
-        if(this.sales[i].groupId == "01"){
-          this.internals.push(this.sales[i]);
-        }
-        if(this.sales[i].groupId == "02"){
-          this.electrics.push(this.sales[i]);
-        }
-        if(this.sales[i].groupId == "04"){
-          this.generals.push(this.sales[i]);
-        }
+        
         
       }
       console.log(sales[0][0]);
@@ -129,7 +132,37 @@ export class DashboardComponent implements OnInit {
     },
   };
 })
+
 }
+
+search(toSearchCode){
+ var group = toSearchCode.substring(0,2);
+ var searchList:any;
+ if(group == "01"){
+      searchList = this.sales[0];
+ }else if(group == "02"){
+  searchList = this.sales[1];
+
+ }else if(group == "03"){
+  searchList = this.sales[2];
+
+ }
+ else if(group == "04"){
+  searchList = this.sales[3];
+
+ }
+ 
+    for(var j = 0; j < searchList.length;j++){
+       if(searchList[j]['code'] == toSearchCode ){
+        this.interestedPart = searchList[j];
+         return 1;
+       }
+    
+    
+  }
+
+}
+
 
 checkCode(){
 var inputCode = <HTMLInputElement>document.getElementById('part_code');
@@ -140,21 +173,20 @@ var found = 0;
 var newline = "<br />";
 
 
-console.log(partCode)
-for(var i = 0; i < this.sales.length ; i++){
-  
-   if(this.sales[i]['code'] == partCode){
-     this.interestedPart = this.sales[i]; //get specific part from stock
-      partInfo.innerHTML = this.sales[i]['name'] +"<br /> ยี่ห้อ" + this.sales[i]['brand'] + ' รุ่น' + this.sales[i]['version'];
-      partInfo.innerHTML += "<br /> ราคาขาย " + this.sales[i]['price'] + " บาท"
-      partInfo.innerHTML += "<br /> ยอดคงเหลือ " + this.sales[i]['amount'] + " ชื้น"
+//console.log(this.sales)
+ 
+   if(this.search(partCode)){
+    
+      partInfo.innerHTML = this.interestedPart['name'] +"<br /> ยี่ห้อ" + this.interestedPart['brand'] + ' รุ่น' + this.interestedPart['version'];
+      partInfo.innerHTML += "<br /> ราคาขาย " + this.interestedPart['price'] + " บาท"
+      partInfo.innerHTML += "<br /> ยอดคงเหลือ " + this.interestedPart['amount'] + " ชื้น"
       
       found = 1;
 
    } 
 
-   
-}
+
+
     if(found != 1){
       partInfo.textContent = "ไม่พบ";
 

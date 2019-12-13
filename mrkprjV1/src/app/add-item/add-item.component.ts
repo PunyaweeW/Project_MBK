@@ -19,6 +19,7 @@ import {brandList} from '../../assets/brandList.json';// import brand list  json
 export class AddItemComponent implements OnInit  {
   public newPart:  Part  = { gid :  null , code:null, pname:  null,brand: null,vers: null, purchase:null};
   public parts:  Part[];
+  private checkingRes: any;
   constructor(private apiService: ApiService) { }
   partRegisterForm: FormGroup;
   private brandList:any= brandList;
@@ -99,24 +100,27 @@ export class AddItemComponent implements OnInit  {
    console.log(hashCode)
    console.log(hashBarcode)
    //checking is   part to be added is exist ?
-   let checkingRes:any = this.apiService.readAPart(this.group,refCode);
-   if(checkingRes.length == 0 ){
-    //add new part 
-    //first add to suitable table 
-    this.apiService.createPart(this.group,refCode,this.name,this.brand,(this.version + this.specific),this.purchase,this.price,this.numberOf) 
-    //second add log info
-
-    //some code will be added soon
-
-    //third add barcode with its hash and ref. code with its hash to hash database table 
+   this.apiService.readAPart(this.group,refCode).subscribe((part: any)=>{
+    if(part == null ){
+        
+      alert("อะไหล่ชิ้นนี้อยู่ในคลังเรียบร้อยแล้ว")
+    } 
+    if(part != null ){
+      console.log("new part added")
+      //add new part 
+      //first add to suitable table 
+      this.apiService.createPart(this.group,refCode,this.name,this.brand,(this.version + this.specific),this.purchase,this.price,this.numberOf) 
+      //second add log info
   
-    //some code will be added soon 
-  }
-   else if (checkingRes.length != 0 ){
-     console.log(checkingRes)
-     alert("อะไหล่ชิ้นนี้อยู่ในคลังเรียบร้อยแล้ว")
-   }
-
+      //some code will be added soon
+  
+      //third add barcode with its hash and ref. code with its hash to hash database table 
+    
+      //some code will be added soon 
+    }
+    
+   });
+    
   }
   //update checking custom brand variable
   setCustomBrand(){

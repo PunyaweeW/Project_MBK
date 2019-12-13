@@ -4,33 +4,32 @@
     
 <div class="card-box">
 <!--updating function for increasing  the number of specific sparepart -->   
-<form id="updateForm">
-<h5>Update</h5>
-กลุ่มอะไหล่ <select id="pgroup" name="pgroup">
+<h5>เพิ่มจำนวนอะไหล่ในคลัง</h5>
+<!--กลุ่มอะไหล่ <select id="pgroup" name="pgroup">
             <option value="00">internals</option>
             <option value="03">externals</option>
             <option value="02">electrics</option>
             <option value="04">generals</option>
-         </select>
+         </select>-->
 <br>      
 รหัสอะไหล่  <input  type="text" id="part_code" (change)="checkCode()">    
 <br>
 จำนวน    <input  type="text" id="amount">
 <br>
 <input type="button" (click)="updateAmount()" value="update">
-</form>
+
 </div>
 
 <!--sales function for sale sparepart(s)-->
 <div class="card-box">   
     <form id="updateForm">
-    <h5>Sale</h5>
-    กลุ่มอะไหล่ <select id="sale_group" name="pgroup">
+    <h5>จำหน่ายอะไหล่</h5>
+<!--    กลุ่มอะไหล่ <select id="sale_group" name="pgroup">
                     <option value="00">internals</option>
                     <option value="03">externals</option>
                     <option value="02">electrics</option>
                     <option value="04">generals</option>
-    </select>
+    </select>-->
     <br>      
     รหัสอะไหล่  <input  type="text" id="sale_code">
     <br>    
@@ -47,6 +46,10 @@
  </div>
  
 </div>
+
+
+
+
   <div class="container">
     <div id="chart"class="card-box">
         <chart [type]="typeExternalsChart" [data]="externalsChart" [options]="optionsExternalsChart"></chart>
@@ -62,10 +65,4 @@
     </div>
 </div>
  
-<!-- <div class=bottom>
-<mat-card>ผ้าดิสเบรคหน้า AMTEX WAVE 125 ยอดขาย 50 ชิ้น</mat-card>
-<mat-card>แบตเตอรรี่แห้ง LEO YTZ 5 ยอดขาย 40 ชิ้น</mat-card>
-<mat-card>โซ่ดำพระอาทิตย์ ยอดขาย 30 ชิ้น</mat-card>
 
-</div> -->
- 

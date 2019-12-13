@@ -18,7 +18,8 @@ export class ApiService {
     return this.httpClient.get<Part[]>('http://127.0.0.1:3000/parts');
   }
   readAPart(groupId,code): Observable<Part[]>{
-    let url = 'http://127.0.0.1:3000/part'+groupId+code;
+    let url = 'http://127.0.0.1:3000/part/'+groupId+'/'+code;
+    console.log(url);
     return this.httpClient.get<Part[]>(url);
   }
   readSales(): Observable<Part[]>{
