@@ -180,8 +180,12 @@ const getLogs = (request, response) => {
 //start of routing section++++++++++++++++++++++++++++++++++
 //var routes = require('./routes/appRoutes.js');  
 //routes(app); //target the route 
+const getHello = (request,response)=>{
+  response.send("Hello from mbk project")
+}
 
 console.log('API server started on: ' + port);
+app.route('/test').get(getHello);
 app.route('/test2').get(getGroup);
 app.route('/part').post(createPart); 
 app.route('/part').put(updatePart);
@@ -195,7 +199,5 @@ app.route('/logging').delete(deleteLogByTime);
 app.route('/loggings').get(getLogs);    
 
 // Start server
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server listening`)
-})
+app.listen(process.env.PORT || 3000, "0.0.0.0")
 // 
