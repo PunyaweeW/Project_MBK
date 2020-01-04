@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const moment = require('moment');
+var db = require('./DBConnect.js')
   app = express(),
   bodyParser = require('body-parser');
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -9,14 +10,15 @@ const moment = require('moment');
   port = process.env.PORT || 3000;
 
 console.log('prepare connection')
-// connection configurations
-const mc = mysql.createConnection({
 
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'Mi7Da15s4',
-    database: 'sparepart'
-});
+// connection configurations
+//const mc = mysql.createConnection({
+//    host: '127.0.0.1',
+//    user: 'root',
+//    password: 'Mi7Da15s4',
+//    database: 'sparepart'
+//});
+
 console.log('use cors')
 //enable cors 
 app.use(cors())
@@ -56,7 +58,7 @@ var Log = function(log){
 
 const getGroup = (request, response) => {
  
-  mc.query('SELECT * FROM part_group', (error, results) => {
+  db.pool.query('SELECT * FROM part_group', (error, results) => {
     if (error) {
       throw error
     }
@@ -65,7 +67,7 @@ const getGroup = (request, response) => {
 
 }
 const getParts = (request, response) => {
-  mc.query('SELECT * FROM part_stock', (error, results) => {
+  db.pool.query('SELECT * FROM part_stock', (error, results) => {
     if (error) {
       console.log(error)
     }
@@ -75,7 +77,7 @@ const getParts = (request, response) => {
 const createPart = (request, response) => {
   var newPart = new Part(request.body);
   console.log(newPart) 
-   mc.query('INSERT INTO part_stock SET ?',newPart, (error, results) => {
+   db.pool.query('INSERT INTO part_stock SET ?',newPart, (error, results) => {
     if (error) {
      // response.send("cannot create new part, may be this part is already exist")
       response.send(error)
@@ -84,7 +86,7 @@ const createPart = (request, response) => {
 }
 
 const getPartById = (request, response) => {
-  mc.query('SELECT * FROM part_group WHERE barcode = ?', request.body.barcode,(error, results) => {
+  db.pool.query('SELECT * FROM part_group WHERE barcode = ?', request.body.barcode,(error, results) => {
     if (error) {
       throw error
     }
@@ -94,7 +96,7 @@ const getPartById = (request, response) => {
 const updatePart = (request, response) => {
   var newPart = new Part(request.body);
   console.log(newPart) 
-   mc.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ? WHERE barcode = ?',[request.body.purchase,request.body.price,request.body.status, request.body.threshold, request.body.numberOf, request.body.barcode], (error, results) => {
+   db.pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ? WHERE barcode = ?',[request.body.purchase,request.body.price,request.body.status, request.body.threshold, request.body.numberOf, request.body.barcode], (error, results) => {
     if (error) {
       response.send("cannot update, may be specified barcode doesn't exist")
     }
@@ -106,7 +108,7 @@ const updatePart = (request, response) => {
 const deletePart = (request, response) => {
   var newPart = new Part(request.body);
   console.log(newPart) 
-   mc.query('DELETE FROM part_stock WHERE barcode = ?',request.body.barcode, (error, results) => {
+   db.pool.query('DELETE FROM part_stock WHERE barcode = ?',request.body.barcode, (error, results) => {
     if (error) {
       response.send("cannot delete, may be specified barcode doesn't exist")
     }
@@ -115,7 +117,7 @@ const deletePart = (request, response) => {
   })
 }
 const getLogByTime = (request,response) => {
-   mc.query('SELECT * FROM log WHERE datetime BETWEEN ? AND ?',[request.body.startDate,request.body.endDate], (error, results) => {
+   db.pool.query('SELECT * FROM log WHERE datetime BETWEEN ? AND ?',[request.body.startDate,request.body.endDate], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       response.send(error)
@@ -127,7 +129,7 @@ const getLogByTime = (request,response) => {
 }
 
 const deleteLogByTime = (request,response) => {
-   mc.query('DELETE FROM log WHERE datetime BETWEEN ? AND ?',[request.body.startDate,request.body.endDate], (error, results) => {
+   db.pool.query('DELETE FROM log WHERE datetime BETWEEN ? AND ?',[request.body.startDate,request.body.endDate], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       response.send(error)
@@ -142,7 +144,7 @@ const createLog = (request, response) => {
   
   var newLog = new Log(request.body);
   console.log(newLog) 
-   mc.query('INSERT INTO log SET ?',[newLog], (error, results) => {
+  db.pool.query('INSERT INTO log SET ?',[newLog], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       response.send(error)
@@ -154,7 +156,7 @@ const createLog = (request, response) => {
 }
 const getLogs = (request, response) => {
   
-   mc.query('SELECT * FROM log ',(error, results) => {
+   db.pool.query('SELECT * FROM log ',(error, results) => {
     if (error) {
       response.send(error);
     }
