@@ -185,7 +185,7 @@ const getHello = (request,response)=>{
 }
 
 console.log('API server started on: ' + port);
-app.route('/test').get(getHello);
+app.route('/test3').get(getHello);
 app.route('/test2').get(getGroup);
 app.route('/part').post(createPart); 
 app.route('/part').put(updatePart);
