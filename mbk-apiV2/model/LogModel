@@ -1,0 +1,6 @@
+var Log = function(log){
+    this.groupId = log.groupId;
+    this.action = log.action;
+    this.timestamp = new Date();
+}
+module.exports = Log;

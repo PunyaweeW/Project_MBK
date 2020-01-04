@@ -1,0 +1,19 @@
+{
+  "name": "toomapi",
+  "version": "1.0.0",
+  "description": "toom morcite",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "choklam",
+  "license": "ISC"
+}
