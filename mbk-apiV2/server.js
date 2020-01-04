@@ -12,11 +12,10 @@ console.log('prepare connection')
 // connection configurations
 const mc = mysql.createConnection({
 
-    host: '52.187.110.96',
+    host: '137.116.130.1',
     user: 'root',
-    password: 'secret',
+    password: 'Mi7Da15s4',
     database: 'sparepart'
-
 });
 console.log('use cors')
 //enable cors 
