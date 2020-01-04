@@ -8,7 +8,7 @@ const mysql = require('mysql');
   app.use(bodyParser.json());
   port = process.env.PORT || 3000;
 
-console.log('prepare connection')
+console.log('connect to DB')
 // connection configurations
 const mc = mysql.createConnection({
     host: '137.116.130.1',
