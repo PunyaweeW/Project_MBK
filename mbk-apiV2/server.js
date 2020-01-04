@@ -12,7 +12,7 @@ console.log('prepare connection')
 // connection configurations
 const mc = mysql.createConnection({
 
-    host: '0.0.0.0',
+    host: 'localhost',
     user: 'root',
     password: 'Mi7Da15s4',
     database: 'sparepart'
