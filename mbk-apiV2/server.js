@@ -11,12 +11,21 @@ const moment = require('moment');
 console.log('prepare connection')
 // connection configurations
 const mc = mysql.createConnection({
-
     host: '137.116.130.1',
     user: 'root',
     password: 'Mi7Da15s4',
     database: 'sparepart'
 });
+
+mc.connect((err)=>{
+    if(err){
+      console.err(err.stack)
+    }
+    console.log('connection successs!')
+
+
+
+})
 console.log('use cors')
 //enable cors 
 app.use(cors())
