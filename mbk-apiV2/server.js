@@ -169,7 +169,7 @@ const getLogs = (request, response) => {
 //routes(app); //target the route 
 
 console.log('API server started on: ' + port);
-app.route('/test').get(getGroup);
+app.route('/test2').get(getGroup);
 app.route('/part').post(createPart); 
 app.route('/part').put(updatePart);
 app.route('/part').delete(deletePart);  
