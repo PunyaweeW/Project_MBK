@@ -19,22 +19,26 @@ const mc = mysql.createConnection({
     password: 'Mi7Da15s4',
     database: 'sparepart'
 });
+const getGroup = (request, response) => {
+ 
+  mc.query('SELECT * FROM part_group', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.send(results)
+  })
 
+}
  
 app.get("/url", (req, res, next) => {
  res.json(["Tony","Lisa","Michael","Ginger","Food"]);
 });
+app.get("/test", (req, res, next) => {
+  getGroup(req,res);
+ });
 
 
-app.get("/test", function(req , res){
-mc.query('SELECT * FROM part_group', (error, results) => {
-    if (error) {
-      throw error
-    }
-    res.send(results)
-  })
- console.log("send data success")
-});
+ 
  
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);
