@@ -36,8 +36,7 @@ const mc = mysql.createConnection({
     }
     res.send(results)
   }) 
-  mc.end();
-   
+    
  });
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);
