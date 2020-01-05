@@ -11,9 +11,8 @@ port = process.env.PORT || 3000;
 app.use(cors())
 
 console.log('prepare connection')
-// connection configurations
-const mc = mysql.createConnection({
-
+ 
+var pool  = mysql.createPool({
     host: '137.116.130.1',
     user: 'root',
     password: 'Mi7Da15s4',
@@ -21,23 +20,36 @@ const mc = mysql.createConnection({
 });
 
 
- mc.connect(function(err){
- if(!err) {
-     console.log("Database is connected ... \n\n");  
- } else {
-     console.log("Error connecting database ... \n\n");  
+ function handle_database(req,res) {
+
+     pool.getConnection(function(err,connection){
+         if (err) {
+           connection.release();
+           res.json({"code" : 100, "status" : "Error in connection database"});
+           return;
+         }   
+
+         console.log('connected as id ' + connection.threadId);
+
+         connection.query("SELECT * FROM part_group",function(err,results){
+             connection.release();
+             if(!err) {
+                 res.send(results);
+             }           
+         });
+
+         connection.on('error', function(err) {      
+               res.json({"code" : 100, "status" : "Error in connection database"});
+               return;     
+         });
+   });
  }
+
+ app.get("/group",function(req,res){-
+         handle_database(req,res);
  });
 
- app.get("/test",function(req,res){
-  mc.query('SELECT * FROM part_group', (error, results) => {
-    if (error) {
-      throw error
-    }
-    res.send(results)
-  }) 
-    
- });
+ 
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);
 app.listen(process.env.PORT || 3000) 
