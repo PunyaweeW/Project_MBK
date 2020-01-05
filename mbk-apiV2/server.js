@@ -25,7 +25,8 @@ app.get("/url", (req, res, next) => {
  res.json(["Tony","Lisa","Michael","Ginger","Food"]);
 });
 
-app.get("/test", (req, res,next) => {
+
+app.get("/test", function(req , res){
 mc.query('SELECT * FROM part_group', (error, results) => {
     if (error) {
       throw error
@@ -33,11 +34,11 @@ mc.query('SELECT * FROM part_group', (error, results) => {
     res.send(results)
   })
  console.log("send data success")
- });
-
+});
+ 
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);
-app.listen(process.env.PORT || 3000, "0.0.0.0") 
+app.listen(process.env.PORT || 3000) 
 
 
  
