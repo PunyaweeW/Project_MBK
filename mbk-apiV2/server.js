@@ -19,14 +19,13 @@ const mc = mysql.createConnection({
     password: 'Mi7Da15s4',
     database: 'sparepart'
 });
-mc.connect()
+
  
 app.get("/url", (req, res, next) => {
  res.json(["Tony","Lisa","Michael","Ginger","Food"]);
 });
 
 app.get("/test", (req, res,next) => {
-
 mc.query('SELECT * FROM part_group', (error, results) => {
     if (error) {
       throw error
