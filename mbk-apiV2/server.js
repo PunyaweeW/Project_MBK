@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const moment = require('moment');
+var MysqlPoolBooster = require('mysql-pool-booster');
+mysql = MysqlPoolBooster(mysql);
 app = express();
 bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
