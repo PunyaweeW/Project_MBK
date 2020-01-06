@@ -21,25 +21,29 @@ var pool  = mysql.createPool({
     debug: false
 
 });
+async function getGroup ()  {
 
-
- 
-//
- app.get("/group",function(req,res){
-     pool.connect(function(err, connection){
+return new Promise( (result) => {
+ pool.getConnection(function(err, connection){
     if(err){
-        res.send(err)
+        result(err)
     }
      connection.query("SELECT * from part_group", function(err, data){
         console.log(data)
-        res.send(data)
+        result(data)
 
         connection.release();
         //////////////////////////////
     });
 });
-
- });
+}); 
+}
+app.get("/group", async (req, res) => {
+        const data = await getGroup();
+        res.send(data);
+    });
+//
+ 
 
  
 //server running+++++++++++++++++++++++++++++++++++
