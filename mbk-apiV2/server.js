@@ -34,7 +34,7 @@ var pool  = mysql.createPool({
         console.log(data)
         res.send(data)
 
-        connection.release();
+        //connection.release();
         
     });
 });
