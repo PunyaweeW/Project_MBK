@@ -26,8 +26,7 @@ var pool  = mysql.createPool({
  
 //
  app.get("/group",function(req,res){
-    console.log("connecting...")
-     pool.getConnection(function(err, connection){
+    pool.getConnection(function(err, connection){
     if(err){
         res.send(err)
     }
