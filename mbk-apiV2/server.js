@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
-const moment = require('moment');
+//const moment = require('moment');
 app = express();
 bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,12 +47,12 @@ var Part = function(part){
     this.status = part.status;
 };
 //log model
-var Log = function(log){
+/*var Log = function(log){
   this.groupId = log.groupId;
   this.barcode = log.barcode;
   this.datetime =  new Date();
   this.action = log.action;
-};
+};*/
 
 
 //end of model section----------------------------------------------------
@@ -159,7 +159,7 @@ app.get("/logging",function(req,res){
   
   });             
    });
-//POST
+/*//POST
 app.post("/logging",function(req,res){
  var newLog = new Log(req.body);
   console.log(newLog) 
@@ -182,6 +182,7 @@ app.delete("/logging",function(req,res){
     res.send(results);
    });
  });
+
 
 
 
