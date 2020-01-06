@@ -26,7 +26,7 @@ var pool  = mysql.createPool({
  
 //
  app.get("/group",function(req,res){
-     pool.getConnection(function(err, connection){
+     pool.connect(function(err, connection){
     if(err){
         res.send(err)
     }
@@ -35,7 +35,7 @@ var pool  = mysql.createPool({
         res.send(data)
 
         connection.release();
-        
+        //////////////////////////////
     });
 });
 
