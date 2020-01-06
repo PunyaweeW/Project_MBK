@@ -30,6 +30,7 @@ var pool  = mysql.createPool({
     if(err){
         res.send(err)
     }
+    console.log("querying...")
      connection.query("SELECT * from part_group", function(err, data){
         console.log(data)
         res.send(data)
