@@ -13,14 +13,17 @@ app.use(cors())
 console.log('prepare connection')
  
 var pool  = mysql.createPool({
+    connectionLimit: 100, //important
     host: '137.116.130.1',
     user: 'root',
     password: 'Mi7Da15s4',
-    database: 'sparepart'
+    database: 'sparepart',
+    debug: false
+
 });
 
 
- function grroup_req(req,res) {
+ function groups_req(req,res) {
  pool.getConnection(function(err, connection){
     if(err){
         res.send(err)
@@ -35,9 +38,9 @@ var pool  = mysql.createPool({
 });
 
  }
-
+//
  app.get("/group",function(req,res){
-          grroup_req(req,res);
+          groups_req(req,res);
  });
 
  
