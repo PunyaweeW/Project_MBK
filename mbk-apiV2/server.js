@@ -159,7 +159,7 @@ app.get("/logging",function(req,res){
   
   });             
    });
-/*//POST
+//POST
 app.post("/logging",function(req,res){
  var newLog = new Log(req.body);
   console.log(newLog) 
@@ -183,7 +183,7 @@ app.delete("/logging",function(req,res){
    });
  });
 
-*/
+
 
 
 
