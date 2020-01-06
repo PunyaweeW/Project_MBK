@@ -183,7 +183,7 @@ app.delete("/logging",function(req,res){
    });
  });
 
-
+*/
 
 
 
