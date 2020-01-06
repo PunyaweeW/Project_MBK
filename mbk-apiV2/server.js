@@ -23,8 +23,10 @@ var pool  = mysql.createPool({
 });
 
 
- function groups_req(req,res) {
- pool.getConnection(function(err, connection){
+ 
+//
+ app.get("/group",function(req,res){
+     pool.getConnection(function(err, connection){
     if(err){
         res.send(err)
     }
@@ -37,10 +39,6 @@ var pool  = mysql.createPool({
     });
 });
 
- }
-//
- app.get("/group",function(req,res){
-          groups_req(req,res);
  });
 
  
