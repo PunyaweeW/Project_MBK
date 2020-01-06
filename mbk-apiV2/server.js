@@ -47,12 +47,12 @@ var Part = function(part){
     this.status = part.status;
 };
 //log model
-/*var Log = function(log){
+var Log = function(log){
   this.groupId = log.groupId;
   this.barcode = log.barcode;
   this.datetime =  new Date();
   this.action = log.action;
-};*/
+};
 
 
 //end of model section----------------------------------------------------
