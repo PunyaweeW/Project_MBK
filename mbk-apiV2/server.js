@@ -2,8 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const moment = require('moment');
-var MysqlPoolBooster = require('mysql-pool-booster');
-mysql = MysqlPoolBooster(mysql);
 app = express();
 bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,29 +21,25 @@ var pool  = mysql.createPool({
     debug: false
 
 });
-async function getGroup ()  {
 
-return new Promise( (result) => {
- pool.getConnection(function(err, connection){
+
+ 
+//
+ app.get("/group",function(req,res){
+     pool.getConnection(function(err, connection){
     if(err){
-        result(err)
+        res.send(err)
     }
      connection.query("SELECT * from part_group", function(err, data){
         console.log(data)
-        result(data)
+        res.send(data)
 
         connection.release();
-        //////////////////////////////
+        
     });
 });
-}); 
-}
-app.get("/group", async (req, res) => {
-        const data = await getGroup();
-        res.send(data);
-    });
-//
- 
+
+ });
 
  
 //server running+++++++++++++++++++++++++++++++++++
