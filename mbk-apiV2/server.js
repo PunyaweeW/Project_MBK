@@ -20,33 +20,24 @@ var pool  = mysql.createPool({
 });
 
 
- function handle_database(req,res) {
+ function grroup_req(req,res) {
+ pool.getConnection(function(err, connection){
+    if(err){
+        res.send(err)
+    }
+     connection.query("SELECT * from part_group", function(err, data){
+        console.log(data)
+        res.send(data)
 
-     pool.getConnection(function(err,connection){
-         if (err) {
-           connection.release();
-           res.json({"code" : 100, "status" : "Error in connection database"});
-           return;
-         }   
+        connection.release();
+        
+    });
+});
 
-         console.log('connected as id ' + connection.threadId);
-
-         connection.query("SELECT * FROM part_group",function(err,results){
-             connection.release();
-             if(!err) {
-                 res.send(results);
-             }           
-         });
-
-         connection.on('error', function(err) {      
-               res.json({"code" : 100, "status" : "Error in connection database"});
-               return;     
-         });
-   });
  }
 
- app.get("/group",function(req,res){-
-         handle_database(req,res);
+ app.get("/group",function(req,res){
+          grroup_req(req,res);
  });
 
  
