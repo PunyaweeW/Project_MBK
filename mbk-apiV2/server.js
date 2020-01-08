@@ -101,20 +101,21 @@ app.put("/part",function(req,res){
     if (error) {
       res.send(error)
     }
-    console.log("update",results[1])
-    res.send(results[1])
+    console.log("updated",results)
+    res.send(results)
         
     });
    });
 //PUT  ORDER 
 app.put("/part/order",function(req,res){
     pool.query('UPDATE part_stock SET orderNum = ? WHERE barcode = ?',[req.body.order, req.body.barcode], (error, results) => {
+   
     if (error) {
       res.send(error)
     }
     console.log("order updated",results)
     res.send(results)
-        
+
     });
    });
 
@@ -206,6 +207,6 @@ app.delete("/logging",function(req,res){
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);
 app.listen(process.env.PORT || 3000) 
-
+////////////////////////////////////////////
 
  
