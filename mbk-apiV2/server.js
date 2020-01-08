@@ -44,7 +44,7 @@ var Part = function(part){
     this.threshold = part.threshold;
     this.numberOf = part.numberOf;
     this.sales = part.sales;
-    this.status = part.status;
+    this.status = part.status;z
 };
 //log model
 var Log = function(log){
@@ -101,24 +101,11 @@ app.put("/part",function(req,res){
     if (error) {
       res.send(error)
     }
-    console.log("updated",results)
-    res.send(results)
+    console.log("update",results[1])
+    res.send(results[1])
         
     });
    });
-//PUT  ORDER 
-app.put("/part/order",function(req,res){
-    pool.query('UPDATE part_stock SET orderNum = ? WHERE barcode = ?',[req.body.order, req.body.barcode], (error, results) => {
-   
-    if (error) {
-      res.send(error)
-    }
-    console.log("order updated",results)
-    res.send(results)
-
-    });
-   });
-
  //POST
 app.post("/part",function(req,res){
   
@@ -160,8 +147,20 @@ app.get("/loggings",function(req,res){
     });
    });
 
-//GET log by time
+//GET all logs
 app.get("/logging",function(req,res){
+    
+     pool.query("SELECT * from log WHERE datetime BETWEEN ? AND ? ",[req.body.startDate,req.body.endDate] ,function(err, data){
+      if (err) {
+      console.log(err)
+    }
+    res.send(data)
+        
+    });
+   });
+
+//GET SALES
+app.get("/sales",function(req,res){
  pool.query('SELECT barcode , COUNT(action) AS sales FROM log WHERE action=20 AND datetime BETWEEN ? AND ? GROUP BY barcode , action',[req.body.startDate,req.body.endDate], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
@@ -172,7 +171,7 @@ app.get("/logging",function(req,res){
   
   });             
    });
-/////////////
+
 //POST
 app.post("/logging",function(req,res){
  var newLog = new Log(req.body);
@@ -207,6 +206,6 @@ app.delete("/logging",function(req,res){
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);
 app.listen(process.env.PORT || 3000) 
-////////////////////////////////////////////
+
 
  
