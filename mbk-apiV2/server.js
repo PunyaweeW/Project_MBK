@@ -106,6 +106,20 @@ app.put("/part",function(req,res){
         
     });
    });
+//PUT UPDATE ORDER 
+app.put("/part/order",function(req,res){
+   
+    pool.query('UPDATE part_stock SET order = ? WHERE barcode = ?',[req.body.order,req.body.barcode], (error, results) => {
+    if (error) {
+      res.send(error)
+    }
+    console.log("update ordering",results[1])
+    res.send(results[1])
+        
+    });
+   });
+
+
  //POST
 app.post("/part",function(req,res){
   
