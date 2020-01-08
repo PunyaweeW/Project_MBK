@@ -101,8 +101,8 @@ app.put("/part",function(req,res){
     if (error) {
       res.send(error)
     }
-    console.log("update",results[1])
-    res.send(results[1])
+    console.log("order updated",results)
+    res.send(results)
         
     });
    });
