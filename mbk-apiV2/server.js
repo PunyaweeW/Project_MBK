@@ -106,7 +106,7 @@ app.put("/part",function(req,res){
         
     });
    });
-//PUT UPDATE ORDER 
+//PUT  ORDER 
 app.put("/part/order",function(req,res){
    
     pool.query('UPDATE part_stock SET order = ? WHERE barcode = ?',[req.body.order,req.body.barcode], (error, results) => {
