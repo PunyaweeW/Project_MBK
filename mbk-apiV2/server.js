@@ -108,17 +108,15 @@ app.put("/part",function(req,res){
    });
 //PUT  ORDER 
 app.put("/part/order",function(req,res){
-   
-    pool.query('UPDATE part_stock SET order = ? WHERE barcode = ?',[req.body.order,req.body.barcode], (error, results) => {
+    pool.query('UPDATE part_stock SET orderNum = ? WHERE barcode = ?',[req.body.order, req.body.barcode], (error, results) => {
     if (error) {
       res.send(error)
     }
-    console.log("update ordering",results[1])
-    res.send(results[1])
+    console.log("order updated",results)
+    res.send(results)
         
     });
    });
-
 
  //POST
 app.post("/part",function(req,res){
@@ -173,7 +171,7 @@ app.get("/logging",function(req,res){
   
   });             
    });
-
+/////////////
 //POST
 app.post("/logging",function(req,res){
  var newLog = new Log(req.body);
