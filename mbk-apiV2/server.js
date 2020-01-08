@@ -109,7 +109,7 @@ app.put("/part",function(req,res){
 //PUT UPDATE ORDER 
 app.put("/part/order",function(req,res){
    
-    pool.query('UPDATE part_stock SET order = ? WHERE barcode = ?',[req.body.order,req.body.barcode], (error, results) => {
+    pool.query('UPDATE part_stock SET orderNum = ? WHERE barcode = ?',[req.body.order,req.body.barcode], (error, results) => {
     if (error) {
       res.send(error)
     }
