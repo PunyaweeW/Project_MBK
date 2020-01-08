@@ -162,11 +162,7 @@ app.get("/loggings",function(req,res){
 
 //GET log by time
 app.get("/logging",function(req,res){
-<<<<<<< HEAD
- pool.query('SELECT barcode , COUNT(action) AS sales FROM log WHERE action = 20 AND datetime BETWEEN ? AND ? GROUP BY barcode , action',[req.body.startDate,req.body.endDate], (error, results) => {
-=======
  pool.query('SELECT barcode , COUNT(action) AS sales FROM log WHERE action=20 AND datetime BETWEEN ? AND ? GROUP BY barcode , action',[req.body.startDate,req.body.endDate], (error, results) => {
->>>>>>> 8e434df28e9148eaf9dcf374c0a23cad58af16ea
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       res.send(error)
