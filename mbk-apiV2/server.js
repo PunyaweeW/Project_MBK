@@ -101,7 +101,7 @@ app.put("/part",function(req,res){
     if (error) {
       res.send(error)
     }
-    console.log("order updated",results)
+    console.log("updated",results)
     res.send(results)
         
     });
@@ -113,9 +113,8 @@ app.put("/part/order",function(req,res){
     if (error) {
       res.send(error)
     }
-    console.log("update ordering",results[1])
-    res.send(results[1])
-        
+    console.log("order updated",results)
+    res.send(results)
     });
    });
 
