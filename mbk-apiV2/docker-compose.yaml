@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  api:
+    container_name: mbk-api
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mbk-api:${APIVER}
+    ports:
+      - '3000:3000'
+    environment:
+      - TZ=Asia/Bangkok
