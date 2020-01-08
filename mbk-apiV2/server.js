@@ -106,6 +106,20 @@ app.put("/part",function(req,res){
         
     });
    });
+//PUT UPDATE ORDER 
+app.put("/part/order",function(req,res){
+   
+    pool.query('UPDATE part_stock SET order = ? WHERE barcode = ?',[req.body.order,req.body.barcode], (error, results) => {
+    if (error) {
+      res.send(error)
+    }
+    console.log("update ordering",results[1])
+    res.send(results[1])
+        
+    });
+   });
+
+
  //POST
 app.post("/part",function(req,res){
   
@@ -149,7 +163,11 @@ app.get("/loggings",function(req,res){
 
 //GET log by time
 app.get("/logging",function(req,res){
+<<<<<<< HEAD
  pool.query('SELECT barcode , COUNT(action) AS sales FROM log WHERE action = 20 AND datetime BETWEEN ? AND ? GROUP BY barcode , action',[req.body.startDate,req.body.endDate], (error, results) => {
+=======
+ pool.query('SELECT barcode , COUNT(action) AS sales FROM log WHERE action=20 AND datetime BETWEEN ? AND ? GROUP BY barcode , action',[req.body.startDate,req.body.endDate], (error, results) => {
+>>>>>>> 8e434df28e9148eaf9dcf374c0a23cad58af16ea
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       res.send(error)
@@ -159,6 +177,7 @@ app.get("/logging",function(req,res){
   
   });             
    });
+
 //POST
 app.post("/logging",function(req,res){
  var newLog = new Log(req.body);
