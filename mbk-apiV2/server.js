@@ -44,7 +44,7 @@ var Part = function(part){
     this.threshold = part.threshold;
     this.numberOf = part.numberOf;
     this.sales = part.sales;
-    this.status = part.status;z
+    this.status = part.status;
 };
 //log model
 var Log = function(log){
