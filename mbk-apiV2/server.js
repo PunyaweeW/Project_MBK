@@ -84,9 +84,9 @@ app.get("/parts",function(req,res){
    });
 
 //GET specific
-app.get("/part",function(req,res){
+app.get("/part/:barcode",function(req,res){
      
-     pool.query("SELECT * from part_stock WHERE barcode = ?",req.body.barcode, function(err, data){
+     pool.query("SELECT * from part_stock WHERE barcode = ?",req.params.barcode, function(err, data){
           if (err) {
       console.log(err)
     }
