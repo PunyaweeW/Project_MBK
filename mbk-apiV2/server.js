@@ -148,7 +148,7 @@ app.delete("/part",function(req,res){
 //GET all logs
 app.get("/loggings",function(req,res){
     
-     pool.query("SELECT * from log", function(err, data){
+     pool.query("SELECT * FROM sparepart.log LEFT JOIN sparepart.action_reference using( actionId ) ", function(err, data){
       if (err) {
       console.log(err)
     }
@@ -160,7 +160,7 @@ app.get("/loggings",function(req,res){
 //GET all logs
 app.get("/logging",function(req,res){
     
-     pool.query("SELECT * from log WHERE datetime BETWEEN ? AND ? ",[req.body.startDate,req.body.endDate] ,function(err, data){
+     pool.query("SELECT * FROM sparepart.log LEFT JOIN sparepart.action_reference using( actionId )  WHERE datetime BETWEEN ? AND ? ",[req.body.startDate,req.body.endDate] ,function(err, data){
       if (err) {
       console.log(err)
     }
