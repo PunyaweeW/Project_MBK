@@ -94,6 +94,17 @@ app.get("/part/:barcode",function(req,res){
         
     });
    });
+//GET BY STATUS
+app.get("/part/status",function(req,res){
+     
+     pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId) WHERE status = ?",req.params.status, function(err, data){
+          if (err) {
+      console.log(err)
+    }
+    res.send(data)
+        
+    });
+   });
 //PUT
 app.put("/part",function(req,res){
    var updatePart = new Part(req.body);
