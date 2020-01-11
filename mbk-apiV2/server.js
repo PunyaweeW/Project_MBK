@@ -169,7 +169,7 @@ app.get("/logging",function(req,res){
     });
    });
 
-//GET SALES
+///GET SALES
 app.get("/sales",function(req,res){
  pool.query('SELECT barcode , COUNT(action) AS sales FROM log WHERE action=20 AND datetime BETWEEN ? AND ? GROUP BY barcode , action',[req.body.startDate,req.body.endDate], (error, results) => {
     if (error) {
