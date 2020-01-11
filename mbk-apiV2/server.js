@@ -44,7 +44,7 @@ var Part = function(part){
     this.threshold = part.threshold;
     this.numberOf = part.numberOf;
     this.sales = part.sales;
-    this.status = part.status;z
+    this.status = part.status;
 };
 //log model
 var Log = function(log){
@@ -74,7 +74,7 @@ app.get("/group",function(req,res){
 //GET all
 app.get("/parts",function(req,res){
     
-     pool.query("SELECT * from part_stock", function(err, data){
+     pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId)", function(err, data){
       if (err) {
       console.log(err)
     }
@@ -86,7 +86,7 @@ app.get("/parts",function(req,res){
 //GET specific
 app.get("/part/:barcode",function(req,res){
      
-     pool.query("SELECT * from part_stock WHERE barcode = ?",req.params.barcode, function(err, data){
+     pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId) WHERE barcode = ?",req.params.barcode, function(err, data){
           if (err) {
       console.log(err)
     }
@@ -108,8 +108,7 @@ app.put("/part",function(req,res){
    });
  //POST
 app.post("/part",function(req,res){
-  
- var newPart = new Part(req.body);
+  var newPart = new Part(req.body);
   console.log(newPart) 
    pool.query('INSERT INTO part_stock SET ?',newPart, (error, results) => {
     if (error) {
