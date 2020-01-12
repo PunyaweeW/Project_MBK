@@ -45,6 +45,7 @@ var Part = function(part){
     this.numberOf = part.numberOf;
     this.sales = part.sales;
     this.status = part.status;
+    this.orderNum = part.orderNum;
 };
 //log model
 var Log = function(log){
@@ -108,12 +109,13 @@ app.get("/part/status/:status",function(req,res){
 //PUT//
 app.put("/part",function(req,res){
    var updatePart = new Part(req.body);
-    pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ? , orderNum = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf,updatePart.orderNum, updatePart.barcode,updatePart.barcode], (error, results) => {
+   console.log(updatePart)
+    pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ?, orderNum = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf,updatePart.orderNum, updatePart.barcode,updatePart.barcode], (error, result) => {
     if (error) {
       res.send(error)
     }
-    console.log("update",results[1])
-    res.send(results[1])
+    console.log("update",result[1])
+    res.send(result[1])
         
     });
    });
