@@ -84,7 +84,7 @@ app.get("/parts",function(req,res){
    });
 
 //GET specific
-app.get("/part/:barcode",function(req,res){
+app.get("/part/barcode/:barcode",function(req,res){
      
      pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId) WHERE barcode = ?",req.params.barcode, function(err, data){
           if (err) {
@@ -95,7 +95,7 @@ app.get("/part/:barcode",function(req,res){
     });
    });
 //GET BY STATUS
-app.get("/part/status",function(req,res){
+app.get("/part/status/:status",function(req,res){
      
      pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId) WHERE status = ?",req.params.status, function(err, data){
           if (err) {
