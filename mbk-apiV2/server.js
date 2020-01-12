@@ -105,10 +105,10 @@ app.get("/part/status/:status",function(req,res){
         
     });
    });
-//PUT
+//PUT//
 app.put("/part",function(req,res){
    var updatePart = new Part(req.body);
-    pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf, updatePart.barcode,updatePart.barcode], (error, results) => {
+    pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ? , orderNum = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf,updatePart.orderNum, updatePart.barcode,updatePart.barcode], (error, results) => {
     if (error) {
       res.send(error)
     }
