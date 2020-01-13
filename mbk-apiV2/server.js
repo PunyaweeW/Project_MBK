@@ -110,7 +110,7 @@ app.get("/part/status/:status",function(req,res){
 app.put("/part",function(req,res){
    var updatePart = new Part(req.body);
    console.log(updatePart)
-    pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ?, orderNum = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf,updatePart.orderNum, updatePart.barcode,updatePart.barcode], (error, result) => {
+    pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ?, orderNum = ?, sales = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf,updatePart.orderNum, updatePart.sales ,updatePart.barcode,updatePart.barcode], (error, result) => {
     if (error) {
       res.send(error)
     }
