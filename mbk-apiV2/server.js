@@ -30,6 +30,18 @@ var pool  = mysql.createPool({
       console.log("success");
     }
   });
+
+//reconnect
+  setInterval(function(){ pool.getConnection(function(err, connection){
+    if(err){
+      console.err(err);
+    }else{
+      console.log("success");
+    }
+  });
+   
+  console.log("reconnecting")
+   }, 300000);   
 //model section+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //part model
 var Part = function(part){
@@ -97,7 +109,7 @@ app.get("/group",function(req,res){
         console.log(data)
         res.send(data)
     //may be
-        //connection.release();
+    //  pool.release();
         
     });
    });
