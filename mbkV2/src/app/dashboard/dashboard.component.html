@@ -1,4 +1,58 @@
-<div class="main">
+<div class="main" id="A">
+    <div class="sellingCard">
 
-    <p>dashboard works!</p>
-</div> 
+
+        <div class="content">
+
+
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)" ngNativeValidate>
+                <p>รหัสอะไหล่</p> <input name="barcode" type="text" id="barcode" (change)="checkBarcode()"
+                    placeholder="ป้อนบาร์โค้ด" ngModel required>
+                <p>จำนวน</p> <input numbersOnly name="number" type="text" id="number" placeholder="ระบุ จำนวน(หน่วย)"
+                    ngModel required>
+                <br>
+                <div class="buttonPanel">
+                    <input type="submit" value="เพิ่มรายการขาย">
+
+
+                </div>
+            </form>
+
+        </div>
+        <div class="resultContent" id="result">
+
+        </div>
+
+
+    </div>
+
+    <div class="xCard" id="reportCard">
+        <p>พิมพ์รายงาน</p>
+        <label for="startDate">ตั้งแต่</label>
+        <input id="startDate" matInput [matDatepicker]="pickerStart" placeholder="วันเริ่มต้น">
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+
+        <label for="endDate">ถึง</label>
+        <input id="endDate" matInput [matDatepicker]="pickerEnd" placeholder="วันสิ้นสุด">
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+        <button (click)="printReport()"><mat-icon >printer</mat-icon></button>
+    </div>
+</div>
+<div class="main" id="B">
+    <div class="xCard">
+        <p>รายการขาย</p>
+        <div class="xContent" id="saleList">
+            <ul>
+                <li *ngFor="let salePart of partToBeSold">
+                    {{salePart.name + ' ' + salePart.brand + ' ' + salePart.version + ' จำนวน ' + salePart.soldValue}}
+                </li>
+            </ul>
+        </div>
+        <button (click)="saleAccept()">ขาย</button>
+
+    </div>
+
+
+</div>

@@ -1,2 +1,23 @@
-<p>notification works!</p>
-<button (click)="sendNotification()">send notification</button>
+<div class="header">
+    <p>อะไหล่ใกล้หมด</p>
+</div>
+     <div class="content" id="content">
+     
+        <mat-card *ngFor="let notification of notifications;  index as i"
+            [ngClass]="{red: notification.numberOf == 3, orange: notification.numberOf == 2 , yellow: notification.numberOf ==1}">
+            ชื่ออะไหล่: {{notification.name}}<br> ยี่ห้อ: {{notification.brand}} <br> รุ่น: {{notification.version}} <br> ราคาซื้อ: {{notification.purchase}} บาท 
+            <br> ราคาขาย: {{notification.price}} บาท <br> ยอดขั้นต่ำ: {{notification.threshold}} หน่วย
+            <br>
+            คงเหลือ: {{notification.numberOf}} หน่วย<br>
+
+            <button id="notification.barcode" class="closebtn"
+                (click)='orderActive(notification,  "span "+notification.barcode)'>สั่งซื้อ</button>
+            <span class="orderingInput" [id]=" 'span '+notification.barcode">
+                <input type="text" [id]=" 'number '+notification.barcode" placeholder="จำนวนที่ต้องการสั่งซื้อ">
+                <input type="button" value="ยืนยัน" (click)='order(notification)'>
+                <input type="button" value="ยกเลิก" (click)='disableSpan("span "+notification.barcode)'>
+            </span>
+        </mat-card>
+    </div>
+
+ <!--<button (click)="sendNotification()">send notification</button>-->

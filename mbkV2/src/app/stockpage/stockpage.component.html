@@ -1,0 +1,26 @@
+<div class="header">
+  <p>รายการอะไหล่ในคลัง</p>
+</div>
+<div id="tableGrid">
+  <ejs-grid #gridView [dataSource]='partData' [searchSettings]='searchSettings' (rowSelected)='save($event)'
+    [allowSorting]='true' [editSettings]='editSettings' [toolbar]='toolbar' [rowHeight]=25 height='273px'>
+    <e-columns>
+
+      <e-column id="code" field='barcode' headerText='บาร์โค้ด' textAlign='left' [allowEditing]='false' width=120>
+      </e-column>
+      <e-column id="code" field='groupName' headerText='กลุ่มอะไหล่' textAlign='left' [allowEditing]='false' width=130>
+      </e-column>
+      <e-column id="code" field='name' headerText='ชื่อ' [allowEditing]='false' width=120></e-column>
+      <e-column id="code" field='brand' headerText='ยี่ห้อ' [allowEditing]='false' textAlign='left' width=120></e-column>
+      <e-column id="code" field='version' headerText='รุ่น' [allowEditing]='false' textAlign='left' width=120></e-column>
+      <e-column id="code" field='purchase' headerText='ราคาซื้อ' textAlign='left' width=120></e-column>
+      <e-column id="code" field='price' headerText='ราคาขาย' textAlign='left' width=120></e-column>
+      <e-column id="code" field='numberOf' headerText='จำนวน' textAlign='left' width=120></e-column>
+      <e-column id="code" field='sales' headerText='ยอดขาย' textAlign='left' width=120></e-column>
+      <e-column id="code" field='threshold' headerText='ยอดขั้นต่ำ' textAlign='left' width=120></e-column>
+      <!--<e-column headerText='Commands' width=140 [commands]='commands'></e-column>-->
+
+    </e-columns>
+  </ejs-grid>
+  <div><button id="saveButton" (click)="update()">บันทักรายการ</button></div>
+</div>
