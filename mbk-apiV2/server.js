@@ -109,7 +109,7 @@ app.get("/group",function(req,res){
         console.log(data)
         res.send(data)
     //may be
-    //  pool.release();
+        //pool.release();
         
     });
    });
