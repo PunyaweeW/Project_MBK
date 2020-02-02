@@ -13,7 +13,7 @@ app.use(cors())
 console.log('prepare connection')
  
 var pool  = mysql.createPool({
-    connectionLimit: 10, 
+    connectionLimit: 100, 
     host: '137.116.130.1',
     user: 'root',
     password: 'Mi7Da15s4',
@@ -262,21 +262,9 @@ app.delete("/logging",function(req,res){
 //end of log handling section--------------------------------------------
 //end of handling section------------------------------------------------
  
-function CONNECT(){
-pool.getConnection(function(err, connection){
-    if(err){
-      console.err(err);
-    }else{
-      console.log("success");
-    }
-  });
  
-}
 
-//app.get('/connect', (req, res) => {
-//  CONNECT();
-//  res.send('reconnect');
-//})
+ 
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);
 app.listen(process.env.PORT || 3000) 
