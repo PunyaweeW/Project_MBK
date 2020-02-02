@@ -32,16 +32,16 @@ var pool  = mysql.createPool({
   });
 
 //reconnect
-  setInterval(function(){ pool.getConnection(function(err, connection){
-    if(err){
-      console.err(err);
-    }else{
-      console.log("success");
-    }
-  });
-   
-  console.log("reconnecting")
-   }, 300000);   
+//  setInterval(function(){ pool.getConnection(function(err, connection){
+//    if(err){
+//      console.err(err);
+//    }else{
+//      console.log("success");
+//    }
+//  });
+///   
+// console.log("reconnecting")
+//   }, 300000);   
 
 
  
