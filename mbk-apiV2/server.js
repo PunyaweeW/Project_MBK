@@ -42,13 +42,14 @@ var pool  = mysql.createPool({
 ///   
 // console.log("reconnecting")
 //   }, 300000);   
-//function keepAlive(){
-//  pool.getConnection(function(err, connection){
-//    if(err) { return; }
-//    connection.ping();
-//  });
-//}
-//setInterval(keepAlive, 30000);
+function keepAlive(){
+  pool.getConnection(function(err, connection){
+    if(err) { return; }
+    connection.ping();
+    connection.release();
+  });
+}
+setInterval(keepAlive, 30000);
 
  
 
