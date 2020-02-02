@@ -1,0 +1,60 @@
+db.sh
+#!/bin/bash
+
+cd db
+sleep 3
+
+docker-compose up -d
+
+docker-compose.yaml
+
+version: '3.3'
+services:
+  mysql:
+    container_name: mbk-db
+    restart: always
+    image: mysql:5
+    environment:
+        MYSQL_ROOT_PASSWORD: 'Mi7Da15s4'
+    volumes:
+        - mbkdata:/var/lib/mysql
+    ports:
+        - '3306:3306'
+    logging:
+            driver: "json-file"
+            options:
+                max-size: "50m"
+    deploy:
+      resources:
+        limits:
+          memory: "500m"
+
+volumes:
+  mbkdata:
+
+---------------------------------------------------------------------------------
+web.sh
+#!/bin/bash
+
+docker run --name mbk-web -d -v /home/coembk/web:/usr/share/nginx/html:ro -p 80:80 nginx
+
+
+
+--------------------------------------------------------------------------------
+api.sh
+#!/bin/bash
+
+cd projectmbk/mbk-apiV2
+sleep 3
+
+pwd
+
+git pull
+sleep 3
+
+docker-compose down
+sleep 10
+
+docker-compose up -d
+--------------------------------------------------------------------------------------------------
+ 
