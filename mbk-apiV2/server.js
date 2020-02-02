@@ -119,7 +119,7 @@ app.get("/group",function(req,res){
         console.log(data)
         res.send(data)
     //may be
-        //pool.release();
+        pool.release();
         
     });
    });
@@ -134,7 +134,7 @@ app.get("/parts",function(req,res){
       console.log(err)
     }
     res.send(data)
-        
+    pool.release();    
     });
    });
 
@@ -146,7 +146,7 @@ app.get("/part/barcode/:barcode",function(req,res){
       console.log(err)
     }
     res.send(data)
-        
+    pool.release();    
     });
    });
 //GET BY STATUS
@@ -157,7 +157,7 @@ app.get("/part/status/:status",function(req,res){
       console.log(err)
     }
     res.send(data)
-        
+    pool.release();    
     });
    });
 //PUT//
@@ -167,10 +167,11 @@ app.put("/part",function(req,res){
     pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ?, orderNum = ?, sales = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf,updatePart.orderNum, updatePart.sales ,updatePart.barcode,updatePart.barcode], (error, result) => {
     if (error) {
       res.send(error)
+      pool.release();
     }
     console.log("update",result[1])
     res.send(result[1])
-        
+    pool.release();    
     });
    });
  //POST
@@ -181,8 +182,10 @@ app.post("/part",function(req,res){
     if (error) {
      // response.send("cannot create new part, may be this part is already exist")
       res.send(error)
+      pool.release();
     }
     res.send(newPart); 
+    pool.release();
   });
    });
 //DELETE
@@ -191,8 +194,10 @@ app.delete("/part",function(req,res){
    pool.query('DELETE FROM part_stock WHERE barcode = ?',req.body.barcode, (error, results) => {
     if (error) {
       res.send(error)
+      pool.release();
     }
     res.send("deleted complete")
+    pool.release();
    });
  });
 
@@ -207,9 +212,10 @@ app.get("/loggings",function(req,res){
      pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM sparepart.log LEFT JOIN sparepart.action_reference using( actionId ) LEFT JOIN sparepart.part_stock using( barcode)", function(err, data){
       if (err) {
       console.log(err)
+      pool.release();
     }
     res.send(data)
-        
+    pool.release();    
     });
    });
 
@@ -219,9 +225,10 @@ app.get("/logging",function(req,res){
      pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM sparepart.log LEFT JOIN sparepart.action_reference using( actionId ) LEFT JOIN sparepart.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ",[req.body.startDate,req.body.endDate] ,function(err, data){
       if (err) {
       console.log(err)
+      pool.release();
     }
     res.send(data)
-        
+   pool.release();     
     });
    });
 
@@ -231,9 +238,10 @@ app.get("/sales/:startDate/:endDate",function(req,res){
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       res.send(error)
+      pool.release();
     }
     res.send(results);
-
+    pool.release();
   
   });             
    });
@@ -246,9 +254,10 @@ app.post("/logging",function(req,res){
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       res.send(error)
+    pool.release();
     }
     res.send(newLog);
-        
+   pool.release();     
     });
    });
 //DELETE
@@ -257,8 +266,10 @@ app.delete("/logging",function(req,res){
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       res.send(error)
+      pool.release();
     }
     res.send(results);
+    pool.release();
    });
  });
 
