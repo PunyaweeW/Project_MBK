@@ -19,8 +19,7 @@ var pool  = mysql.createPool({
     password: 'Mi7Da15s4',
     database: 'sparepart',
     debug: false,
-    multipleStatements: true
-
+    multipleStatements: true,
 
 });
     pool.getConnection(function(err, connection){
@@ -45,11 +44,12 @@ var pool  = mysql.createPool({
 function keepAlive(){
   pool.getConnection(function(err, connection){
     if(err) { return; }
-    connection.ping();
+    console.log("200 OK")
+    //connection.ping();
     connection.release();
   });
 }
-setInterval(keepAlive, 30000);
+setInterval(keepAlive, 300000);
 
  
 
