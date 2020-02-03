@@ -45,7 +45,7 @@ function keepAlive(){
   pool.getConnection(function(err, connection){
     if(err) { return; }
     console.log("200 OK")
-    //connection.ping();
+    connection.ping();
     connection.release();
   });
 }
