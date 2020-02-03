@@ -49,7 +49,7 @@ function keepAlive(){
     connection.release();
   });
 }
-setInterval(keepAlive, 300000);
+setInterval(keepAlive, 600000);
 
  
 
