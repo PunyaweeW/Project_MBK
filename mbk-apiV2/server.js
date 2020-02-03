@@ -24,7 +24,7 @@ var pool = mysql.createPool({
 });
 pool.getConnection(function (err, connection) {
   if (err) {
-    console.err(err);
+    console.log(err);
   } else {
     console.log("success");
   }
@@ -44,7 +44,7 @@ pool.getConnection(function (err, connection) {
 function keepAlive() {
   pool.getConnection(function (err, connection) {
     if (err) { return; }
-    console.log("200 OK")
+    console.log("200 OK");
     connection.ping();
     connection.release();
   });
@@ -56,7 +56,7 @@ setInterval(keepAlive, 600000);
 //model section+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //part model
 var Part = function (part) {
-  console.log(part.groupId)
+  console.log(part.groupId);
   this.groupId = part.groupId;
   this.barcode = part.barcode;
   this.name = part.name;
@@ -71,7 +71,7 @@ var Part = function (part) {
   this.orderNum = part.orderNum;
 };
 //log model
-var Log = function (log) {
+var Log = function (log); {
   this.groupId = log.groupId;
   this.barcode = log.barcode;
   this.datetime = NOW();
@@ -85,26 +85,31 @@ function NOW() {
   var gg = date.getDate();
   var mm = (date.getMonth() + 1);
 
-  if (gg < 10)
+  if (gg < 10){
     gg = "0" + gg;
+  }
 
-  if (mm < 10)
+  if (mm < 10){
     mm = "0" + mm;
+  }
 
   var cur_day = aaaa + "-" + mm + "-" + gg;
 
-  var hours = date.getHours()
-  var minutes = date.getMinutes()
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
   var seconds = date.getSeconds();
 
-  if (hours < 10)
+  if (hours < 10){
     hours = "0" + hours;
+  }
 
-  if (minutes < 10)
+  if (minutes < 10){
     minutes = "0" + minutes;
+  }
 
-  if (seconds < 10)
+  if (seconds < 10){
     seconds = "0" + seconds;
+  }
 
   return cur_day + " " + hours + ":" + minutes + ":" + seconds;
 
@@ -116,11 +121,11 @@ function NOW() {
 //get group for testing 
 app.get("/group", function (req, res) {
   pool.getConnection(function (err, connection) {
-    if (err) { console.log(err) }
-    console.log("200 OK")
+    if (err) { console.log(err); }
+    console.log("200 OK");
     connection.query("SELECT * from part_group", function (err, data) {
-      console.log(data)
-      res.send(data)
+      console.log(data);
+      res.send(data);
       connection.release();
     });
 
@@ -131,11 +136,11 @@ app.get("/group", function (req, res) {
 //GET all
 app.get("/parts", function (req, res) {
   pool.getConnection(function (err, connection) {
-    if (err) { console.log(err) }
-    console.log("200 OK")
+    if (err) { console.log(err); }
+    console.log("200 OK");
     connection.query("SELECT * FROM part_stock left JOIN part_group using(groupId)", function (err, data) {
-      console.log(data)
-      res.send(data)
+      console.log(data);
+      res.send(data);
       connection.release();
     });
   });
@@ -145,12 +150,12 @@ app.get("/parts", function (req, res) {
 //GET specific
 app.get("/part/barcode/:barcode", function (req, res) {
   pool.getConnection(function (err, connection) {
-    if (err) { console.log(err) }
+    if (err) { console.log(err); }
     connection.query("SELECT * FROM part_stock left JOIN part_group using(groupId) WHERE barcode = ?", req.params.barcode, function (err, data) {
       if (err) {
-        console.log(err)
+        console.log(err);
       }
-      res.send(data)
+      res.send(data);
       connection.release();
     });
 
@@ -163,7 +168,7 @@ app.get("/part/status/:status", function (req, res) {
     if (err) { console.log(err); }
     connection.query("SELECT * FROM part_stock left JOIN part_group using(groupId) WHERE status = ?", req.params.status, function (err, data) {
       if (err) {
-        console.log(err)
+        console.log(err);
       }
       res.send(data)
       connection.release();
@@ -180,11 +185,11 @@ app.put("/part", function (req, res) {
     if (err) { console.log(err); }
     connection.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ?, orderNum = ?, sales = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?', [updatePart.purchase, updatePart.price, updatePart.status, updatePart.threshold, updatePart.numberOf, updatePart.orderNum, updatePart.sales, updatePart.barcode, updatePart.barcode], (error, result) => {
       if (error) {
-        res.send(error)
+        res.send(error);
         connection.release();
       }
-      console.log("update", result[1])
-      res.send(result[1])
+      console.log("update", result[1]);
+      res.send(result[1]);
       connection.release();
     });
   });
@@ -192,7 +197,7 @@ app.put("/part", function (req, res) {
 //POST
 app.post("/part", function (req, res) {
   var newPart = new Part(req.body);
-  console.log(newPart)
+  console.log(newPart);
   pool.getConnection(function (err, connection) {
     if (err) { console.log(err); }
 
@@ -213,7 +218,7 @@ app.delete("/part", function (req, res) {
     if (err) { console.log(err); }
     connection.query('DELETE FROM part_stock WHERE barcode = ?', req.body.barcode, (error, results) => {
       if (error) {
-        res.send(error)
+        res.send(error);
         connection.release();
       }
       res.send("deleted complete")
@@ -232,7 +237,7 @@ app.get("/loggings", function (req, res) {
   pool.getConnection(function (err, connection) {
     connection.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM sparepart.log LEFT JOIN sparepart.action_reference using( actionId ) LEFT JOIN sparepart.part_stock using( barcode)", function (err, data) {
       if (err) {
-        console.log(err)
+        console.log(err);
         connection.release();
       }
       res.send(data)
@@ -314,6 +319,4 @@ app.delete("/logging", function (req, res) {
 
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);
-app.listen(process.env.PORT || 3000)
-
-
+app.listen(process.env.PORT || 3000);
