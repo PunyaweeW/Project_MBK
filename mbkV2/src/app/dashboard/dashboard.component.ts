@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 //services
 import { MbkApiService } from '../mbk-api.service';//api service
 import { DataserviceService } from "../../app/dataservice.service"//send data service
@@ -31,13 +32,43 @@ pdfMake.fonts = {
 
 //chart
 import { ChartConfiguration, Chart } from "chart.js";
+=======
+import { MbkApiService } from '../mbk-api.service';
+import { DataserviceService } from "../../app/dataservice.service"
+//import { PdfmakeService } from 'ng-pdf-make/pdfmake/pdfmake.service';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import { DateAdapter } from '@angular/material';
+
+import { contentReady } from '@syncfusion/ej2-angular-grids';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { element } from 'protractor';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.fonts = {
+  THSarabunNew: {
+    normal: 'THSarabunNew.ttf',
+    bold: 'THSarabunNew-Bold.ttf',
+    italics: 'THSarabunNew-Italic.ttf',
+    bolditalics: 'THSarabunNew-BoldItalic.ttf'
+  },
+  Roboto: {
+    normal: 'Roboto-Regular.ttf',
+    bold: 'Roboto-Medium.ttf',
+    italics: 'Roboto-Italic.ttf',
+    bolditalics: 'Roboto-MediumItalic.ttf'
+  }
+}
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+<<<<<<< HEAD
   //begin of report configuration section++++++++++++++++++++++++++++++++++++++++++++++++++
+=======
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
   docDefinition = {
     content: [
       { text: 'This is a header', style: 'header' },
@@ -57,12 +88,16 @@ export class DashboardComponent implements OnInit {
       }
     }
   };
+<<<<<<< HEAD
   //end of report configuration section----------------------------------------------------------
   //test array for dashboard++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=======
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
   notifications = [
     { "groupId": "01", "barcode": "000000", "name": "A", "brand": "B", "version": "V", "numberOf": 3, "status": "300", "order": 0, "price": 45, "purchase": 35, "threshold": 5, "sales": 2 },
     { "groupId": "01", "barcode": "000001", "name": "AA", "brand": "B", "version": "V", "numberOf": 3, "status": "300", "order": 0, "price": 45, "purchase": 35, "threshold": 5, "sales": 2 }
   ];
+<<<<<<< HEAD
   //end of test array-----------------------------------------------------------------------------
 
   //start  saling handling section++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -138,6 +173,13 @@ export class DashboardComponent implements OnInit {
       });
     });
 
+=======
+  partToBeSold: any = [];
+  interestedPart: any;
+  constructor(private mbkApiService: MbkApiService, private dataService: DataserviceService) { }
+  ngOnInit() {
+    //initialize pdfmakeservice
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 
 
   }
@@ -212,7 +254,10 @@ export class DashboardComponent implements OnInit {
         result.innerHTML = "ข้อมูลอะไหล่ <br />" + part[0]['name'] + "<br /> ยี่ห้อ " + part[0]['brand'] + ' รุ่น ' + part[0]['version'];
         result.innerHTML += "<br /> ราคาขาย " + part[0]['price'] + " บาท"
         result.innerHTML += "<br /> ยอดคงเหลือ " + part[0]['numberOf'] + " หน่วย"
+<<<<<<< HEAD
         result.innerHTML += "<br /> ยอดขั้นต่ำ " + part[0]['threshold'] + " หน่วย"
+=======
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 
       }
 
@@ -220,6 +265,7 @@ export class DashboardComponent implements OnInit {
   }
   //end of saling section------------------------------
   //sales report genarator+++++++++++++++++++++++++++++
+<<<<<<< HEAD
   generateSalesReport() {
     var startDatePicker = <HTMLInputElement>document.getElementById("startDate");
     var endDatePicker = <HTMLInputElement>document.getElementById("endDate");
@@ -402,5 +448,117 @@ export class DashboardComponent implements OnInit {
 
   }
   //end of chart managing section-------------------------------------------------------------------------
+=======
+  generateSalesReport(startDate, endDate) {
+    var contents = "";
+    var startDateRev = startDate.split("/").reverse().join("/");
+    var endDateRev = endDate.split("/").reverse().join("/");
+    contents = "รายงานการขาย"
+    contents += "ตั้งแต่วันที่ " + startDate + " ถึงวันที่ " + endDate;
+    contents += "\n______________________________\n";
+    // for (var i = 0; i < this.partToBeSold.length; i++) {
+    //   contents += this.partToBeSold[i].name + this.partToBeSold[i].brand + this.partToBeSold[i].version + " ยอดขาย " + this.partToBeSold[i].sales + " หน่วย";
+    //   contents += '\n';
+    // }
+    return contents;
+  }
+  //sales report generator-----------------------------
+  //sales accept+++++++++++++++++++++++++++++++++++++++
+  //this function is to sale all part in partToBeSold array
+  saleAccept() {
+    this.partToBeSold.forEach(element => {
+      this.mbkApiService.updatePart(element).subscribe((part: any) => { });
+      var newLog = {
+        "groupId": element.group,
+        "barcode": element.barcode,
+        "actionId": "20"
+      }
+      console.log(newLog)
+      this.mbkApiService.createLog(newLog).subscribe((log: any) => { });
+    });
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 
+
+
+
+    this.prinReceipt();
+  }
+  //sales accept---------------------------------------
+  //sales receipt genarator+++++++++++++++++++++++++++++
+  generateReceipt() {
+    var contents = [];
+    var content = "";
+    var headers = "";
+    var sum = 0;
+    var priceSum = 0;
+    //
+    var dd = "";
+    var mm = "";
+    var today = new Date();
+
+    var yyyy = today.getFullYear();
+    if (today.getDate() < 10) {
+      dd = '0' + (today.getDate()).toString();
+    } else {
+      dd = (today.getDate()).toString();
+    }
+
+    if (today.getMonth() + 1 < 10) {
+      mm = '0' + (today.getMonth() + 1).toString();
+    } else {
+      mm = (today.getMonth()).toString();
+
+    }
+
+    var date = dd + '/' + mm + '/' + yyyy;
+    //
+
+
+    headers = "ใบกำกับภาษีอย่างย่อ\n";
+    headers += date + "\n";
+    headers += "\n------------------------------------------\n";
+    headers += "รายการอะไหล่\n";
+    content += "\n";
+    for (var i = 0; i < this.partToBeSold.length; i++) {
+      content += this.partToBeSold[i].name + " " + this.partToBeSold[i].brand + " " + this.partToBeSold[i].version + " " + "ราคา " + this.partToBeSold[i].price + " บาท " + "\nยอดจำหน่าย " + this.partToBeSold[i].sales + " หน่วย";
+      sum += this.partToBeSold[i].sales;
+      priceSum += (this.partToBeSold[i].sales * this.partToBeSold[i].price);
+      content += '\n';
+    }
+    content += "\n------------------------------------------\n";
+
+    content += "ยอดสุทธิ " + sum;
+    content += "\n ยอดชำระ " + priceSum + " บาท";
+
+    contents.push({ text: headers, bold: true }, { text: content })
+    return contents;
+  }
+
+
+  //sales receipt generator-----------------------------
+  prinReceipt() {
+
+    const documentDefinition = {
+      pageSize: {
+        width: 200,
+        height: 'auto'
+      }, content: this.generateReceipt(), defaultStyle: { font: "THSarabunNew" }
+    };
+    pdfMake.createPdf(documentDefinition).open();
+  }
+
+  //printing report++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  printReport() {
+    var startDate = <HTMLInputElement>document.getElementById("startDate");
+    var endDate = <HTMLInputElement>document.getElementById("endDate");
+    console.log(startDate.value, endDate.value);
+    const documentDefinition = {
+      pageSize: {
+        width: 200,
+        height: 'auto'
+      }, content: this.generateSalesReport(startDate.value, endDate.value), defaultStyle: { font: "THSarabunNew" }
+    };
+    pdfMake.createPdf(documentDefinition).open();
+  }
+  //printing report---------------------------------------------------------
 }

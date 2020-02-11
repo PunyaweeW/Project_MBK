@@ -15,7 +15,11 @@
         <button id="order.barcode" class="closebtn"
             (click)='orderActive(order,  "span "+order.barcode)'>เพิ่มอะไหล่</button>
         <span class="orderingInput" [id]=" 'span '+order.barcode">
+<<<<<<< HEAD
             <label>จำนวนอะไหล่ที่ได้รับ<input type="number" [id]=" 'number '+order.barcode"  ></label>
+=======
+            <input type="number" [id]=" 'number '+order.barcode" placeholder="จำนวนอะไหล่ที่ได้รับ">
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
             <input type="button" value="ยืนยัน" (click)='orderAccept(order)'>
             <input type="button" value="ยกเลิก" (click)='disableSpan("span "+order.barcode)'>
         </span>

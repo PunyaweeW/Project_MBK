@@ -67,6 +67,7 @@ export class OrderingComponent implements OnInit {
       receivedpart.numberOf = sumUp;
       receivedpart.status = "100";
       this.mbkApiService.updatePart(receivedpart).subscribe((part:any)=>{});
+<<<<<<< HEAD
       var newLog = {
         "groupId": order.groupId,
         "barcode": order.barcode,
@@ -74,13 +75,18 @@ export class OrderingComponent implements OnInit {
       }
       console.log(newLog)
       this.mbkApiService.createLog(newLog).subscribe((log: any) => { });
+=======
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
       for (var i = 0; i < this.orders.length; i++) {
         if (this.orders[i].barcode == order.barcode) {
           this.orders.splice(i, 1);  //delete from notification array
         }
       }
       this.sendOrdering(this.orders.length);
+<<<<<<< HEAD
     
+=======
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
     }
     else{
       console.log("remain")
@@ -90,6 +96,7 @@ export class OrderingComponent implements OnInit {
       var receivedpart = order;
       order.orderNum = remainOrder;
       receivedpart.numberOf = sumUp;
+<<<<<<< HEAD
       receivedpart.status = "200";
       this.mbkApiService.updatePart(receivedpart).subscribe((part:any)=>{});
       //add log 
@@ -100,6 +107,11 @@ export class OrderingComponent implements OnInit {
       }
       console.log(newLog)
       this.mbkApiService.createLog(newLog).subscribe((log: any) => { });
+=======
+      receivedpart.status = "100";
+ 
+ 
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
     }
     //this.mbkApiService.updatePart(receivedpart).subscribe((part:any)=>{});
   

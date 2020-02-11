@@ -13,11 +13,11 @@ app.use(cors())
 console.log('prepare connection')
  
 var pool  = mysql.createPool({
-    connectionLimit: 100, //important
+    connectionLimit: 100, 
     host: '137.116.130.1',
     user: 'root',
     password: 'Mi7Da15s4',
-    database: 'sparepart',
+    database: 'spareparts',
     debug: false,
     multipleStatements: true
 
@@ -25,11 +25,33 @@ var pool  = mysql.createPool({
 });
     pool.getConnection(function(err, connection){
     if(err){
-      console.err(err);
+      console.log(err);
     }else{
       console.log("success");
     }
   });
+
+//reconnect
+//  setInterval(function(){ pool.getConnection(function(err, connection){
+//    if(err){
+//      console.err(err);
+//    }else{
+//      console.log("success");
+//    }
+//  });
+///   
+// console.log("reconnecting")
+//   }, 300000);   
+//function keepAlive(){
+//  pool.getConnection(function(err, connection){
+//    if(err) { return; }
+//    connection.ping();
+// });
+//}
+//setInterval(keepAlive, 30000);
+
+ 
+
 //model section+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //part model
 var Part = function(part){
@@ -51,10 +73,42 @@ var Part = function(part){
 var Log = function(log){
   this.groupId = log.groupId;
   this.barcode = log.barcode;
-  this.datetime =  new Date();
-  this.action = log.action;
+  this.datetime =  NOW();
+  this.actionId = log.actionId;
 };
+//handling datetime+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function NOW() {
 
+    var date = new Date();
+    var aaaa = date.getFullYear();
+    var gg = date.getDate();
+    var mm = (date.getMonth() + 1);
+
+    if (gg < 10)
+        gg = "0" + gg;
+
+    if (mm < 10)
+        mm = "0" + mm;
+
+    var cur_day = aaaa + "-" + mm + "-" + gg;
+
+    var hours = date.getHours()
+    var minutes = date.getMinutes()
+    var seconds = date.getSeconds();
+
+    if (hours < 10)
+        hours = "0" + hours;
+
+    if (minutes < 10)
+        minutes = "0" + minutes;
+
+    if (seconds < 10)
+        seconds = "0" + seconds;
+
+    return cur_day + " " + hours + ":" + minutes + ":" + seconds;
+
+}
+//end of handling datetime------------------------------------------------
 
 //end of model section----------------------------------------------------
 //handling section++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -65,7 +119,7 @@ app.get("/group",function(req,res){
         console.log(data)
         res.send(data)
     //may be
-        //connection.release();
+        //pool.release();
         
     });
    });
@@ -110,7 +164,7 @@ app.get("/part/status/:status",function(req,res){
 app.put("/part",function(req,res){
    var updatePart = new Part(req.body);
    console.log(updatePart)
-    pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ?, orderNum = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf,updatePart.orderNum, updatePart.barcode,updatePart.barcode], (error, result) => {
+    pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ?, orderNum = ?, sales = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf,updatePart.orderNum, updatePart.sales ,updatePart.barcode,updatePart.barcode], (error, result) => {
     if (error) {
       res.send(error)
     }
@@ -150,7 +204,7 @@ app.delete("/part",function(req,res){
 //GET all logs
 app.get("/loggings",function(req,res){
     
-     pool.query("SELECT * FROM sparepart.log LEFT JOIN sparepart.action_reference using( actionId ) ", function(err, data){
+     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode)", function(err, data){
       if (err) {
       console.log(err)
     }
@@ -162,7 +216,7 @@ app.get("/loggings",function(req,res){
 //GET all logs
 app.get("/logging",function(req,res){
     
-     pool.query("SELECT * FROM sparepart.log LEFT JOIN sparepart.action_reference using( actionId )  WHERE datetime BETWEEN ? AND ? ",[req.body.startDate,req.body.endDate] ,function(err, data){
+     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ",[req.body.startDate,req.body.endDate] ,function(err, data){
       if (err) {
       console.log(err)
     }
@@ -172,8 +226,8 @@ app.get("/logging",function(req,res){
    });
 
 ///GET SALES
-app.get("/sales",function(req,res){
- pool.query('SELECT barcode , COUNT(action) AS sales FROM log WHERE action=20 AND datetime BETWEEN ? AND ? GROUP BY barcode , action',[req.body.startDate,req.body.endDate], (error, results) => {
+app.get("/sales/:startDate/:endDate",function(req,res){
+ pool.query('SELECT * FROM part_stock RIGHT JOIN (SELECT  barcode , COUNT(actionId) AS duratSales FROM log WHERE actionId = 20 AND datetime BETWEEN ? AND ? GROUP BY barcode , actionId) AS sales using (barcode)',[req.params.startDate,req.params.endDate], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       res.send(error)
@@ -211,9 +265,11 @@ app.delete("/logging",function(req,res){
 
 
 
-
 //end of log handling section--------------------------------------------
 //end of handling section------------------------------------------------
+ 
+ 
+
  
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);

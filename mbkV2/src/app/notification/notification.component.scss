@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 p{
  font-family: 'Prompt', sans-serif;
    
@@ -150,4 +151,45 @@ input[type=number]{
     margin: 2%;
     font-family: 'Prompt', sans-serif;
     border-radius: 5px;
+=======
+.header{
+    box-shadow: 5px 5px 10px 10px rgba(50,50,50,.4);
+    transition: 0.3s;
+    left: 0;
+    padding: 1%;
+    background-color: lightgrey;
+    color: black;
+    height: 5%;
+    text-align: left;
+    
+}
+ 
+.content{
+    margin: 2%;
+    padding: 5%;
+    background-color: lightgray;
+    overflow: scroll;
+}
+mat-card{
+    margin: 4%;
+    padding: 2%;
+    height: 50%;
+    background-color: grey;
+    color: white;
+    box-shadow: 5px 5px 10px 10px rgba(133, 130, 130, 0.4);
+    transition: 0.3s;
+
+}
+span{
+    display: none;
+    align-items: flex-start;
+}
+input[type=text]{
+    border-radius: 5px;
+}
+input[type=button] , button {
+    border-radius: 5px;
+    background-color: rgb(47, 255, 92);
+    color: black;
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 }

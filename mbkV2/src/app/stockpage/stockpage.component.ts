@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MbkApiService } from '../mbk-api.service';
 import { closest } from '@syncfusion/ej2-base';
+<<<<<<< HEAD
 import { jsPDF, jspdf } from "jspdf"
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -25,11 +26,17 @@ declare var JsBarcode: any;
 const jsPDF = require('jspdf')
 
 
+=======
+
+import { PageSettingsModel, RowSelectEventArgs, click, Grid } from '@syncfusion/ej2-grids';
+import { CommandModel, Column, SearchSettingsModel, IEditCell, GridComponent, IRow, EditSettingsModel, ToolbarItems } from '@syncfusion/ej2-angular-grids';
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 @Component({
   selector: 'app-stockpage',
   templateUrl: './stockpage.component.html',
   styleUrls: ['./stockpage.component.scss']
 })
+<<<<<<< HEAD
 
 export class StockpageComponent implements OnInit {
   docDefinition = {
@@ -53,6 +60,11 @@ export class StockpageComponent implements OnInit {
   };
   //these viables are for grid controls
 
+=======
+export class StockpageComponent implements OnInit {
+
+  //these viables are for grid controls
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
   public editSettings: EditSettingsModel;
   public toolbar: ToolbarItems[];
   public elem: HTMLElement;
@@ -64,7 +76,11 @@ export class StockpageComponent implements OnInit {
   public selectedRow: any;
   @ViewChild('gridView', { static: false })
   public gridView: GridComponent;
+<<<<<<< HEAD
   public pageSettings: Object;
+=======
+  public pageSettings: PageSettingsModel;
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
   ////////////////////////////
   selectedInd: any;
   sourceRow: any;
@@ -79,7 +95,10 @@ export class StockpageComponent implements OnInit {
 
     });
     //grid setting 
+<<<<<<< HEAD
     this.pageSettings = { pageSizes: true, pageSize: 10 };
+=======
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true }; // edit setting
     this.searchSettings = { fields: ['barcode', 'name', 'brand'] };// search setting
     //this.commands = [{ buttonOption: { content: 'Details', cssClass: 'e-flat', click: this.save.bind(this) } }]; //individual command not use , remove later
@@ -91,7 +110,10 @@ export class StockpageComponent implements OnInit {
       { field: 'threshold', direction: 'Descending' }]
     };
     this.toolbar = ['Update', 'Cancel', 'Search'];
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
   }
 
   //update amount
@@ -111,7 +133,11 @@ export class StockpageComponent implements OnInit {
     let collectionData = selectedRowData.children
     //console.log(collectionData);
     //console.log(collectionData[0].innerHTML);
+<<<<<<< HEAD
     var groupMap = collectionData[2].innerHTML;
+=======
+    var groupMap = collectionData[1].innerHTML;
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
     if (groupMap == "อะไหล่ภายใน") {
       groupMap = "01";
     } else if (groupMap == "ระบบไฟฟ้า") {
@@ -124,6 +150,7 @@ export class StockpageComponent implements OnInit {
 
     let updatedPart = {
       "grouId": groupMap,
+<<<<<<< HEAD
       "barcode": collectionData[1].innerHTML,
       "name": collectionData[3].innerHTML,
       "brand": collectionData[4].innerHTML,
@@ -133,6 +160,17 @@ export class StockpageComponent implements OnInit {
       "numberOf": collectionData[8].innerHTML,
       "sales": collectionData[9].innerHTML,
       "threshold": collectionData[10].innerHTML
+=======
+      "barcode": collectionData[0].innerHTML,
+      "name": collectionData[2].innerHTML,
+      "brand": collectionData[3].innerHTML,
+      "version": collectionData[4].innerHTML,
+      "purchase": collectionData[5].innerHTML,
+      "price": collectionData[6].innerHTML,
+      "numberOf": collectionData[7].innerHTML,
+      "sales": collectionData[8].innerHTML,
+      "threshold": collectionData[9].innerHTML
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
     }
     console.log(updatedPart)
     //update part 
@@ -167,6 +205,7 @@ export class StockpageComponent implements OnInit {
 
     //this.apiService.updatePart(data["group"],data["code"],data["name"],data["brand"],data["version"],data["purchase"],data["price"],data["number_of"],data["sales"]);
   }
+<<<<<<< HEAD
   print() {
 
     console.log(this.gridView.getSelectedRows())
@@ -274,3 +313,7 @@ export class StockpageComponent implements OnInit {
   }
 }
 
+=======
+
+}
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9

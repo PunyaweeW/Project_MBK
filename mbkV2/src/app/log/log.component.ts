@@ -26,6 +26,7 @@ export class LogComponent implements OnInit {
 
   //constructor
   constructor(private mbkApiService: MbkApiService) {
+<<<<<<< HEAD
     //grid setting 
     this.searchSettings = { fields: ['name', 'brand', 'datetime', 'actionName'] };// search setting
     //this.commands = [{ buttonOption: { content: 'Details', cssClass: 'e-flat', click: this.save.bind(this) } }]; //individual command not use , remove later
@@ -34,11 +35,25 @@ export class LogComponent implements OnInit {
       { field: 'brand', direction: 'Descending' }, { field: 'version', direction: 'Descending' }]
     };
     this.toolbar = ['Search'];
+=======
+     //grid setting 
+      this.searchSettings = { fields: ['name', 'brand','datetime', 'actionName'] };// search setting
+     //this.commands = [{ buttonOption: { content: 'Details', cssClass: 'e-flat', click: this.save.bind(this) } }]; //individual command not use , remove later
+     this.sortOptions = {
+       columns: [{ field: 'barcode', direction: 'Descending' }, { field: 'name', direction: 'Descending' },// sort setting
+       { field: 'brand', direction: 'Descending' }, { field: 'version', direction: 'Descending' }]
+     };
+     this.toolbar = [ 'Search']; 
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
   }
 
   ngOnInit() {
     this.mbkApiService.readLoggings().subscribe((log: any) => { this.logData = log; console.log(this.logData) });
+<<<<<<< HEAD
     this.pageSettings = {pageCount:3, pageSize: 12 };
+=======
+
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
   }
 
 }

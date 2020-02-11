@@ -19,6 +19,7 @@ export class MbkApiService implements OnInit {
 
 
   constructor(private httpClient: HttpClient) { }
+<<<<<<< HEAD
  
   ngOnInit(): void {
   }
@@ -26,6 +27,15 @@ export class MbkApiService implements OnInit {
   updatePart(part) {
     var partToUpdate = part;
     return this.httpClient.put<any[]>(this.API_SERVER + '/part', partToUpdate, { headers: this.headers });
+=======
+
+  ngOnInit(): void {
+  }
+  //update part
+  updatePart(part){
+     var partToUpdate = part;
+        return this.httpClient.put<any[]>( this.API_SERVER+'/part', partToUpdate, {headers: this.headers});
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 
   }
   //get all part
@@ -55,6 +65,7 @@ export class MbkApiService implements OnInit {
     var newLog = log;
     return this.httpClient.post<any[]>(this.API_SERVER + '/logging', newLog, { headers: this.headers });
 
+<<<<<<< HEAD
   }
   getSales(duration): Observable<any[]> {
     
@@ -63,4 +74,8 @@ export class MbkApiService implements OnInit {
   reconnect() : Observable<any[]> {
     return this.httpClient.get<any[]>(this.API_SERVER + '/group');
   }
+=======
+   }
+
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 }

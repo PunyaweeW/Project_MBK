@@ -11,7 +11,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 //materialdesign and icons
 import { MatCardModule } from '@angular/material/card';
 
+<<<<<<< HEAD
 import { MatInputModule, MatBadgeModule, MatButtonModule } from '@angular/material';
+=======
+import { MatInputModule, MatBadgeModule, MatButtonModule} from '@angular/material';
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 //routing
 import { Routes, RouterModule } from '@angular/router';
 import { AppRoutingModule } from "../app/app-routing.module";
@@ -27,7 +31,11 @@ import { LogComponent } from './log/log.component';
 import { OrderingComponent } from './ordering/ordering.component';
 //grid
 import { GridModule } from '@syncfusion/ej2-angular-grids';
+<<<<<<< HEAD
 import { EditService, ToolbarService, SortService, CommandColumnService, PageService } from '@syncfusion/ej2-angular-grids';
+=======
+import { EditService, ToolbarService, SortService, CommandColumnService } from '@syncfusion/ej2-angular-grids';
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 //services
 import { DataserviceService } from "../app/dataservice.service";
 import { MbkApiService } from "../app/mbk-api.service";
@@ -46,12 +54,19 @@ import { MatTableModule } from '@angular/material/table';
 import { LocationStrategy, PathLocationStrategy, HashLocationStrategy } from '@angular/common';
 //pdf
 //datepicker
+<<<<<<< HEAD
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
 //chart 
 import { ChartModule } from 'angular2-chartjs';
+=======
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 
 
 
@@ -89,6 +104,7 @@ import { ChartModule } from 'angular2-chartjs';
     MatTableModule,
     MatToolbarModule,
     ReactiveFormsModule,
+<<<<<<< HEAD
 
   ],
   providers: [
@@ -100,6 +116,19 @@ import { ChartModule } from 'angular2-chartjs';
     EditService, ToolbarService, SortService, CommandColumnService, MatDatepickerModule
   ],
 
+=======
+    
+  ],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS},
+    DataserviceService,
+    MbkApiService,
+    EditService, ToolbarService, SortService, CommandColumnService, MatDatepickerModule
+  ],
+  
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
   bootstrap: [AppComponent]
 })
 

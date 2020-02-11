@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * {
  
     font-size: 20px;
@@ -69,3 +70,53 @@ margin-bottom: 5%;
     display: flex-s;
     justify-content:space-between;
 }
+=======
+* {
+    font: Verdana, Arial, 'sans-serif' !important;/* <-- fonts */
+    font-size: 15px;
+}
+.header{
+    box-shadow: 5px 5px 10px 10px rgba(50,50,50,.4);
+    transition: 0.3s;
+    left: 0;
+    padding: 1%;
+    background-color: lightgrey;
+    color: black;
+    height: 5%;
+    text-align: left;
+    
+    
+}
+#tableGrid{
+    margin-top: 5%;
+    margin-bottom: 2%;
+}
+.e-grid{
+    margin-bottom: 2%;
+}
+.e-grid .e-gridcontent { /* grid content color*/ 
+    background-color: #FFF8DC; 
+    border-color: black; 
+    color: black; 
+} 
+ 
+
+.e-gridheader .e-headercell, .e-grid td.e-active { /* grid header color and grid row select color*/ 
+    background: grey; 
+    color: white;
+    max-height: 100%;
+    font-size: 20px; 
+    border-bottom-color: #8B4513; 
+} 
+.e-grid .e-gridheader { /* grid header font color and styles*/ 
+    color: white; 
+    border-top-width: 0px; 
+    border-bottom-width: 0px; 
+    border-bottom-color: #ffaf4e; 
+    border-top-color: #bbbcbb; 
+ } 
+.e-grid .e-headercelldiv{ /* grid headercell font styles*/ 
+    font-weight:lighter; 
+    font-size: 20px; 
+}  
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9

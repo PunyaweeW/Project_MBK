@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+=======
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 import { } from "../../environments/environment"
 import { AngularFireDatabase, AngularFireDatabaseModule, AngularFireList } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
@@ -139,6 +143,7 @@ export class AddItemComponent implements OnInit {
       //for new name doesn't exist in database
       this.name = this.submittedForm.customName;
       this.customName = true;
+<<<<<<< HEAD
     }
     
     if (!this.reactiveForm.controls['normalBrand'].disabled) {
@@ -173,6 +178,42 @@ export class AddItemComponent implements OnInit {
 
     }
     
+=======
+    }
+    
+    if (!this.reactiveForm.controls['normalBrand'].disabled) {
+      //normal brands
+      this.brand = this.submittedForm.normalBrand;
+      this.notCustomBrand = true;
+    } else if (!this.reactiveForm.controls['customBrand'].disabled) {
+      //custom brands
+      this.brand = this.submittedForm.customBrand;
+      this.customBrand = true;
+    }
+    
+    
+    if (!this.reactiveForm.controls['normalVersion'].disabled) {
+      //normal versions
+      this.version = this.submittedForm.normalVersion;
+      this.notCustomVersion = true;
+    } else if (!this.reactiveForm.controls['customVersion'].disabled) {
+      //custom versions
+      this.version = this.submittedForm.customVersion;
+      this.customVersion = true;
+    }
+    
+    if (!this.reactiveForm.controls['normalSpecs'].disabled) {
+      //normal specs
+      this.specs = this.submittedForm.normalSpecs;
+      this.notCustomSpecs;
+    } else if (!this.reactiveForm.controls['customSpecs'].disabled) {
+      //custom brands
+       this.specs = this.submittedForm.customSpecs;
+       this.customSpecs
+
+    }
+    
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
     
     let groupName = this.groupDict.find(x => { if (x.code == this.submittedForm.group) { return x } });
     this.barcode = this.submittedForm.barcode;
@@ -236,11 +277,19 @@ export class AddItemComponent implements OnInit {
       path = 'sparepart/' + this.nameList.length + '/' + 'specifics/';
       console.log(path);
       this.db.object(path).update({ 0: this.submittedForm.customSpecs });
+<<<<<<< HEAD
 
     }
     //end of handling name-----------------------------------------------------------
 
 
+=======
+
+    }
+    //end of handling name-----------------------------------------------------------
+
+
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
     //handling brand data++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     if (this.notCustomBrand) {
       //normal brands
@@ -276,7 +325,11 @@ export class AddItemComponent implements OnInit {
           var versionInd = this.versionList.length;
           var newversion = { [versionInd]: this.version };
           console.log(newversion)
+<<<<<<< HEAD
           var path = 'sparepart/' + i + '/' + 'versions/';
+=======
+          var path = 'sparepart/' + i + '/' + 'brands/';
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
           console.log(path);
           this.db.object(path).update(newversion);
         }
@@ -312,11 +365,19 @@ export class AddItemComponent implements OnInit {
     //end of handling specs---------------------------------------
  
 
+<<<<<<< HEAD
   }
   cancelRegist() {
     var reviewBox = <HTMLElement>document.getElementById("formResultWindow");
     reviewBox.style.display = "none";
   }
+=======
+  }
+  cancelRegist() {
+    var reviewBox = <HTMLElement>document.getElementById("formResultWindow");
+    reviewBox.style.display = "none";
+  }
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
   //accept handling section-------------------
 
   //form control section+++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -377,6 +438,7 @@ export class AddItemComponent implements OnInit {
 
   }
   //end of form control section----------------------------------------------
+<<<<<<< HEAD
 }
  */
 
@@ -780,4 +842,6 @@ export class AddItemComponent implements OnInit {
 
   }
   //end of form control section----------------------------------------------
+=======
+>>>>>>> 2085d0a14d962a4a162ca8f56586236f80fcc4f9
 }
