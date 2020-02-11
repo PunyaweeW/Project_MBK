@@ -1,0 +1,23 @@
+<div class="header">
+  <p>รายการอะไหล่ในคลัง</p>
+</div>
+<div id="tableGrid">
+  <ejs-grid #gridView [dataSource]='logData'  [allowPaging]='true' height='268px'
+    [pageSettings]='pageSettings' [allowSorting]='true' [toolbar]='toolbar' [rowHeight]=25 height='273px' >
+    <e-columns>
+      <e-column id="code" field='datetime' headerText='วันและเวลา' textAlign='left' [allowEditing]='false' width=170>
+      </e-column>
+      <e-column id="code" field='name' headerText='ชื่ออะไหล่' textAlign='left' [allowEditing]='false' width=120>
+      </e-column>
+      <e-column id="code" field='brand' headerText='ยี่ห้อ' textAlign='left' [allowEditing]='false' width=120>
+      </e-column>
+      <e-column id="code" field='version' headerText='รุ่น' textAlign='left' [allowEditing]='false' width=120>
+      </e-column>
+      <e-column id="code" field='actionName' headerText='รายการดำเนินการ' textAlign='left' [allowEditing]='false'
+        width=130>
+      </e-column>
+
+    </e-columns>
+  </ejs-grid>
+
+</div>

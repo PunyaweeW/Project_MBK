@@ -1,0 +1,40 @@
+* {
+ 
+    font-size: 20px;
+}
+.header{
+    box-shadow: 5px 5px 10px 10px rgba(50,50,50,.4);
+    transition: 0.3s;
+    left: 0;
+    padding: 1%;
+    background-color: lightgray;
+    color: black;
+    height: auto;
+    text-align: left;
+    font-family: 'Prompt', sans-serif;
+     margin-bottom: 5%;
+}
+
+.e-grid .e-headercell{
+    background-color: rgb(54, 49, 49);
+    
+    color: white;
+    font-family: 'Prompt', sans-serif;
+    font-size: 20px;
+    height: 50px;
+    width: 100%;
+}
+.e-grid .e-rowcell{
+     background-color: rgb(107, 102, 102);
+     height: 50px;
+    color: wheat;
+    font-family: 'Prompt', sans-serif;
+    font-size: 20px;
+} 
+.e-grid td.e-active { /* grid header color and grid row select color*/ 
+    background: rgba(238, 219, 166, 0.897); 
+    color: black;
+    height: 50px;
+    max-width: 100%;
+    font-size: 20px;
+ } 

@@ -1,0 +1,61 @@
+.header{
+    box-shadow: 5px 5px 10px 10px rgba(50,50,50,.4);
+    transition: 0.3s;
+    left: 0;
+    padding: 1%;
+    background-color: lightgray;
+    color: black;
+    height: auto;
+    text-align: left;
+    font-family: 'Prompt', sans-serif;
+    font-size: 20px;
+     margin-bottom: 5%
+
+    }
+ 
+.content{
+    margin: 2%;
+    padding: 5%;
+    background-color: darkgrey;
+    overflow: scroll;
+}
+mat-card{
+    font-size: 20px;
+    margin: 4%;
+    padding: 2%;
+    height: 50%;
+    background-color: rgb(241, 238, 234);
+    color: black;
+    box-shadow: 5px 5px 10px 10px rgba(133, 130, 130, 0.4);
+    transition: 0.3s;
+    font-family: 'Prompt', sans-serif;
+
+}
+span{
+    display: none;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    font-family: 'Prompt', sans-serif;
+
+}
+input[type=text],input[type=number]{
+    border-radius: 5px;
+    font-family: 'Prompt', sans-serif;
+    border-radius: 5px;
+    width: 8%;
+    margin-left: 5%;
+
+}
+input[type=button] , button {
+    border-radius: 5px;
+    background-color: rgb(47, 255, 92);
+    color: black;
+    margin-left: 5%;
+    padding: 5px;
+    font-size: 15px;
+    font-family: 'Prompt', sans-serif;
+    width: 15%;
+    height: 10%;
+    height: 2%;
+    border-radius: 5px;
+}

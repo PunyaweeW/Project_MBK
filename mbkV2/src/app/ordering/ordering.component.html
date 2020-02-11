@@ -1,0 +1,23 @@
+<div class="header">
+    <p>รายการสั่งซื้อที่อยู่ระหว่างรอรับอะไหล่</p>
+</div>
+<div class="content" id="content">
+
+    <mat-card *ngFor="let order of orders;  index as i"
+        [ngClass]="{red: order.numberOf == 3, orange: order.numberOf == 2 , yellow: order.numberOf ==1}">
+        ชื่ออะไหล่: {{order.name}}<br> ยี่ห้อ: {{order.brand}} <br> รุ่น: {{order.version}} <br> ราคาซื้อ:
+        {{order.purchase}} บาท
+        <br> ราคาขาย: {{order.price}} บาท <br> ยอดขั้นต่ำ: {{order.threshold}} หน่วย
+        <br>
+        คงเหลือ: {{order.numberOf}} หน่วย<br>
+        จำนวนรอรับ: {{order.orderNum}} หน่วย <br>
+
+        <button id="order.barcode" class="closebtn"
+            (click)='orderActive(order,  "span "+order.barcode)'>เพิ่มอะไหล่</button>
+        <span class="orderingInput" [id]=" 'span '+order.barcode">
+            <label>จำนวนอะไหล่ที่ได้รับ<input type="number" [id]=" 'number '+order.barcode"  ></label>
+            <input type="button" value="ยืนยัน" (click)='orderAccept(order)'>
+            <input type="button" value="ยกเลิก" (click)='disableSpan("span "+order.barcode)'>
+        </span>
+    </mat-card>
+</div>

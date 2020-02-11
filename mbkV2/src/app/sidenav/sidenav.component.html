@@ -6,15 +6,19 @@
 <mat-drawer-container class="example-container" autosize>
 
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <h6>{{message}}</h6>
+    <!--<h6>{{message}}</h6>-->
     <div id="menuList">
       <ul>
-        <li *ngFor="let menuitem of menuitems">
-          <a [routerLink]="menuitem.path">
+        <li *ngFor="let menuitem of menuitems" routerLinkActive="active" [ngSwitch]="menuitem.path">
+          <a [routerLink]="menuitem.path" [id]="[menuitem.aId]">
             <div class="anchortext">
-            <mat-icon>{{menuitem.icon}} </mat-icon>
-            <p class="menuText" *ngIf="expand">{{menuitem.component}}</p>
-          </div>
+              <mat-icon [id]="[menuitem.text]" matBadge="{{ notifyNO > 0 ? notifyNO : null }}" matBadgeOverlap="true"
+                *ngSwitchCase="'notification'">{{menuitem.icon}}</mat-icon>
+              <mat-icon [id]="[menuitem.text]" matBadge="{{ orderingNO > 0 ? orderingNO : null }}"
+                matBadgeOverlap="true" *ngSwitchCase="'ordering'">{{menuitem.icon}}</mat-icon>
+              <mat-icon matBadge="{{ null }}" matBadgeOverlap="false" *ngSwitchDefault>{{menuitem.icon}}</mat-icon>
+              <span class="menuText" *ngIf="expand">{{menuitem.component}}</span>
+            </div>
           </a>
         </li>
 
@@ -22,11 +26,13 @@
 
     </div>
 
-   <footer><mat-icon mat-button (click)="expand = !expand">{{ expand ? 'arrow_back' : 'arrow_forward'}}</mat-icon></footer> 
+    <footer>
+      <mat-icon mat-button (click)="expand = !expand">{{ expand ? 'arrow_back' : 'arrow_forward'}}</mat-icon>
+    </footer>
 
   </mat-drawer>
 
- 
+
   <div class="display-panel">
     <router-outlet></router-outlet>
   </div>
