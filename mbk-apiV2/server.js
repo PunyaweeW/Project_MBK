@@ -2,6 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 //const moment = require('moment');
+const http = require('http')
+ 
+ const options = {
+  hostname: '137.116.130.1',
+  port: 3000,
+  path: '/group',
+  method: 'GET'
+}
 app = express();
 bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,13 +50,21 @@ var pool  = mysql.createPool({
 ///   
 // console.log("reconnecting")
 //   }, 300000);   
-//function keepAlive(){
-//  pool.getConnection(function(err, connection){
-//    if(err) { return; }
-//    connection.ping();
-// });
-//}
-//setInterval(keepAlive, 30000);
+function keepAlive(){
+  console.log("refresh"); 
+  http.get("http://137.116.130.1:3000/group", res => {
+ res.setEncoding("utf-8");
+  let body = "";
+  res.on("data", data => {
+    body += data;
+  });
+  res.on("end", () => {
+    body = JSON.parse(body);
+    console.log(body);
+  });
+});
+ }
+setInterval(keepAlive, 6000);
 
  
 
