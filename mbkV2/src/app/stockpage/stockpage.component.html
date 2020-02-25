@@ -1,0 +1,40 @@
+<div class="header">
+  <p>รายการอะไหล่ในคลัง</p>
+</div>
+<div id="tableGrid">
+  <ejs-grid class="customGrid" #gridView [allowPaging]="true" [pageSettings]="pageSettings"
+  [dataSource]='partData' [searchSettings]='searchSettings'
+    (rowSelected)='save($event)'  [editSettings]='editSettings' [toolbar]='toolbar' [rowHeight]=50
+    height='350px' font-size='20px'>
+    <e-columns>
+      <e-column type='checkbox' id="code" textAlign='left' width=50>
+      </e-column>
+      <e-column id="code" field='barcode' headerText='บาร์โค้ด' textAlign='left' [allowEditing]='false' width=150>
+      </e-column>
+      <e-column id="code" field='groupName' headerText='กลุ่มอะไหล่' textAlign='left' [allowEditing]='false' width=180>
+      </e-column>
+      <e-column id="code" field='name' headerText='ชื่อ' [allowEditing]='false' width=120></e-column>
+      <e-column id="code" field='brand' headerText='ยี่ห้อ' [allowEditing]='false' textAlign='left' width=150>
+      </e-column>
+      <e-column id="code" field='version' headerText='รุ่น' [allowEditing]='false' textAlign='left' width=150>
+      </e-column>
+      <e-column id="code" field='purchase' headerText='ราคาซื้อ' textAlign='left' width=100></e-column>
+      <e-column id="code" field='price' headerText='ราคาขาย' textAlign='left' width=100></e-column>
+      <e-column id="code" field='numberOf' headerText='จำนวน' textAlign='left' width=100></e-column>
+      <e-column id="code" field='sales' headerText='ยอดขาย' textAlign='left' width=100></e-column>
+      <e-column id="code" field='threshold' headerText='ยอดขั้นต่ำ' textAlign='left' width=100></e-column>
+      <!--<e-column headerText='Commands' width=140 [commands]='commands'></e-column>-->
+
+    </e-columns>
+  </ejs-grid>
+  <div class="buttonPanel"><button class="actionButton" id="saveButton" (click)="update()">
+      <mat-icon>save</mat-icon>บันทึก
+    </button>
+    <!--<button class="actionButton" id="saveButton" (click)="print()">test</button>-->
+    <button class="actionButton" id="downLoad" (click)="download()">
+      <mat-icon>print</mat-icon>พิมพ์บาร์โค้ด
+    </button>
+  </div>
+
+  <div id="barcodeDiv"><canvas id="barcode"></canvas></div>
+</div>

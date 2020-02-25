@@ -1,0 +1,113 @@
+<div class="mainPlane">
+    <div class="main" id="A">
+        <div class="sellingCard">
+
+
+            <div class="content">
+
+
+                <form #f="ngForm" (ngSubmit)="onSubmit(f)" ngNativeValidate>
+ 
+                    <div class="buttonPanel">
+                        <p>รหัสอะไหล่</p> <input name="barcode" type="text" id="barcode" (change)="checkBarcode()"
+                            placeholder="ป้อนบาร์โค้ด" ngModel required>
+
+                        <p>จำนวนที่ต้องการขาย</p> <input name="number" type="number" id="number" ngModel required>
+                        <input type="submit" value="เพิ่มรายการขาย">
+                        <p>จำนวนที่สั่งซื้อ</p> <input name="orderNumber" type="number" id="orderNumber" ngModel
+                            required>
+                        <input type="button" (click)="addOrderPart()" value="เพิ่มรายการสั่งซื้อ">
+
+
+                    </div>
+                </form>
+
+            </div>
+          
+            <label id="resultLabel" for="result"><span id="spanResult">สถานะปัจจุบัน</span>
+                <div class="resultContent" id="result">
+
+                </div>
+            </label>
+
+
+
+        </div>
+
+
+        <div class="xCard" id="listCard">
+            <span>รายการขาย</span>
+            <div class="xContent" id="saleList">
+                <ul>
+                    <li *ngFor="let salePart of partToBeSold">
+                        {{salePart.name + ' ' + salePart.brand + ' ' + salePart.version + ' จำนวน ' + salePart.soldValue}}
+                    </li>
+                </ul>
+            </div>
+
+
+            <button (click)="saleAccept()">
+                <mat-icon> attach_money</mat-icon>
+                ขาย
+            </button>
+
+        </div>
+    </div>
+    <div class="main" id="B">
+        <div class="xCard" id="reportCard">
+            <label> <span>พิมพ์รายงาน</span> <button id="printButton" (click)="generateSalesReport()"> พิมพ์
+                    <mat-icon>printer</mat-icon>
+                </button></label>
+            <label for="startDate">ตั้งแต่</label>
+            <input id="startDate" matInput [matDatepicker]="pickerStart" placeholder="วันเริ่มต้น">
+            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStart></mat-datepicker>
+
+            <label for="endDate">ถึง</label>
+            <input id="endDate" matInput [matDatepicker]="pickerEnd" placeholder="วันสิ้นสุด">
+            <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEnd></mat-datepicker>
+
+
+        </div>
+        <div class="chartCard">
+
+            <div id="chartControl">
+                <label for="topNum">กราฟสรุปยอดขาย</label>
+                <input id="topNum" type="number" min="0" max="{{topSalesDataLength}}" (change)="chartUpdate()">
+                <label for="topNum">อันดับแรก</label>
+                <br>
+                <label for="chartTypeList">ประเภทชาร์ต</label>
+                <select name="chartTypeList" (change)="chartTypeUpdate($event)">
+                    <option value="bar">กราฟแท่ง</option>
+                    <option value='doughnut'>โดนัท</option>
+                    <option value="line">กราฟเส้น</option>
+                </select>
+            </div>
+            <div class="xContent" id="salesPlot">
+                <canvas id="chartSales"></canvas>
+                <!-- <chart id="chartSales" [type]="chartType" height="500" [data]="chartData" [options]="chartOptions">
+            </chart>-->
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+    <!--   <div class="main" id="C">
+        <div class="xCard" id="orderCard">
+
+
+            <label> <span>เพิ่มรายการสั่งซื้อ</span> <button id="printButton" (click)="generateSalesReport()"> เพิ่ม
+                    <mat-icon>add_shopping_cart</mat-icon>
+                </button></label>
+            <br>
+            <label><span>รหัสอะไหล่ <input type="text" name="orderedNumber"></span></label>
+
+            <label><span>จำนวนอะไหล่ที่สั่ง <input type="number" name="orderedNumber"></span></label>
+        </div>
+
+    </div> -->
+</div>

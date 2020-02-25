@@ -1,0 +1,153 @@
+p{
+ font-family: 'Prompt', sans-serif;
+   
+    
+}
+.header{
+    box-shadow: 5px 5px 10px 10px rgba(50,50,50,.4);
+    transition: 0.3s;
+    left: 0;
+    padding: 1%;
+    background-color: lightgray;
+    color: black;
+    height: auto;
+    text-align: left;
+    font-family: 'Prompt', sans-serif;
+    font-size: 20px;
+     margin-bottom: 5%;
+}
+/*scroll bar*/
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+::-webkit-scrollbar-thumb {
+    background: rgb(44, 41, 41); 
+  }
+  
+ ::-webkit-scrollbar-thumb:hover {
+    background: black; 
+  }
+
+/*cards and contents*/
+ .content{
+    margin: 2%;
+    padding: 5%;
+    background-color: lightgray;
+    overflow: scroll;
+}
+mat-card{
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 10px;
+    padding: 2%;
+    height: 50%;
+    width: 75%;
+    background-color: grey;
+    color: white;
+    box-shadow: 5px 5px 10px 10px rgba(133, 130, 130, 0.4);
+    transition: 0.3s;
+    border-radius: 15px;
+}
+label{
+    display: block;
+    margin: 5px 0;
+    font-size: 20px;
+    
+    font-family: 'Prompt', sans-serif;
+}
+label .contentspan{
+    display: inline-block;
+    text-align: right;
+    width:25%;
+}
+span{
+    display: none;
+    align-items: flex-start;
+}
+input[type=text]{
+    border-radius: 5px;
+}
+input[type=button] , button {
+    border-radius: 5px;
+    background-color: rgb(47, 255, 92);
+    color: black;
+}
+ 
+.buttonPanel{
+    margin: 5px;
+    font-family: 'Prompt', sans-serif;
+    padding: 20px;
+}
+/*card notification*/ 
+.red {
+    background-color: rgb(240, 56, 56);
+    padding: 20px;
+    color: black;
+}
+
+.redContent{
+    background-color: rgba(255, 221, 221, 0.931);
+    color: black;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 20px;
+    font-family: 'Prompt', sans-serif;
+     text-align: center;
+     justify-content: center;
+    
+}
+
+.orange {
+    background-color: rgb(226, 188, 101);
+    padding: 20px;
+    color: black;
+}
+
+.orangeContent{
+    background-color: rgba(250, 151, 58, 0.931);
+    color: black;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 20px;
+    font-family: 'Prompt', sans-serif;
+    
+    
+}
+.yellow {
+    background-color: rgb(228, 230, 137);
+    padding: 20px;
+    color: black;
+}
+
+.yellowContent{
+    background-color: rgba(233, 233, 44, 0.931);
+    color: black;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 20px;
+    font-family: 'Prompt', sans-serif;
+    
+    
+}
+button,input[type=button]{
+    padding: 5px;
+    font-size: 20px;
+    font-family: 'Prompt', sans-serif;
+    border-radius: 5px;
+
+}
+button:hover,input[type=button]:hover{
+    background-color: greenyellow;
+}
+input[type=number]{
+    width: 8%;
+    height: 15%;
+    margin: 2%;
+    font-family: 'Prompt', sans-serif;
+    border-radius: 5px;
+}

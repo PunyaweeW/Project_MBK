@@ -1,0 +1,43 @@
+<div class="header">
+
+    <mat-icon>notification_important</mat-icon>
+    <p>อะไหล่ใกล้หมด</p>
+    <br>
+</div>
+<div class="content" id="content">
+
+    <mat-card *ngFor="let notification of notifications;  index as i"
+        [ngClass]="{red: notification.numberOf >= (0.25*notification.threshold), orange: notification.numberOf >= (0.5*notification.threshold) , yellow: notification.numberOf >= (0.75*notification.threshold)}">
+        <mat-icon>notification_important</mat-icon>
+
+        <div
+            [ngClass]="{redContent: notification.numberOf >= (0.25*notification.threshold), orangeContent: notification.numberOf >= (0.5*notification.threshold) , yellowContent: notification.numberOf >= (0.75*notification.threshold)}">
+
+            <b>ชื่ออะไหล่: </b> {{notification.name}}<br> <b>ยี่ห้อ: </b> {{notification.brand}} <br> <b>รุ่น: </b>
+            {{notification.version}}
+            <br>
+            <b>ราคาซื้อ: </b> {{notification.purchase}} บาท
+            <br> <b>ราคาขาย: </b> {{notification.price}} บาท <br> <b>ยอดขั้นต่ำ: </b> {{notification.threshold}} หน่วย
+            <br>
+            <b>คงเหลือ: </b> {{notification.numberOf}} หน่วย<br>
+        </div>
+
+        <div class="buttonPanel">
+            <button id="notification.barcode" class="closebtn"
+                (click)='orderActive(notification,  "span "+notification.barcode)'>
+                <mat-icon>shopping_cart</mat-icon>
+                สั่งซื้อ
+            </button>
+            <span class="orderingInput" [id]=" 'span '+notification.barcode">
+                <label>จำนวนที่ต้องการสั่งซื้อ<input type="number" [id]=" 'number '+notification.barcode">
+                    <input type="button" value="ยืนยัน" (click)='order(notification)'>
+                    <input type="button" value="ยกเลิก" (click)='disableSpan("span "+notification.barcode)'></label>
+
+            </span>
+        </div>
+
+    </mat-card>
+
+</div>
+
+<!--<button (click)="sendNotification()">send notification</button>-->
