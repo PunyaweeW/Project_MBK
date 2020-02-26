@@ -253,6 +253,18 @@ app.get("/sales/:startDate/:endDate",function(req,res){
   
   });             
    });
+///GET REPORT
+app.get("/report/:reportCode/:startDate/:endDate",function(req,res){
+ pool.query('SELECT * FROM part_stock RIGHT JOIN (SELECT  barcode , COUNT(actionId) AS duratReport FROM log WHERE actionId = ? AND datetime BETWEEN ? AND ? GROUP BY barcode , actionId) AS sales using (barcode)',[req.params.reportCode,req.params.startDate,req.params.endDate], (error, results) => {
+    if (error) {
+      //response.send("cannot create new log, please check specified barcode")
+      res.send(error)
+    }
+    res.send(results);
+
+  
+  });             
+   });
 
 //POST
 app.post("/logging",function(req,res){
