@@ -3,8 +3,7 @@ const cors = require('cors');
 const mysql = require('mysql');
 //const moment = require('moment');
 const http = require('http')
-const helmet = require('helmet')
-
+const jwt = require("jwt-simple");
  const options = {
   hostname: '137.116.130.1',
   port: 3000,
@@ -15,10 +14,15 @@ app = express();
 bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+const loginAuth = (req, res, next) => {
+   if(req.body.username === "coembk" && 
+      req.body.password === "Mi7Da15s4") next();
+   else res.send("Wrong username and password") 
+    
+}
 port = process.env.PORT || 3000;
 //enable cors
 app.use(cors())
-app.use(helmet())
 
 console.log('prepare connection')
  
@@ -131,6 +135,14 @@ function NOW() {
 //end of model section----------------------------------------------------
 //handling section++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //get group for testing 
+app.post("/login", loginAuth, (req, res) => {
+   const payload = {
+      sub: req.body.username,
+      iat: new Date().getTime() 
+   };
+   const SECRET = "MY_SECRET_KEY";  
+   res.send(jwt.encode(payload, SECRET));
+});
 app.get("/group",function(req,res){
  
      pool.query("SELECT * from part_group", function(err, data){
@@ -222,9 +234,9 @@ app.delete("/part",function(req,res){
 //GET all logs
 app.get("/loggings",function(req,res){
     
-     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) ORDER BY STR_TO_DATE(datetime,'%d/%m/%Y') DESC", function(err, data){
+     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode)", function(err, data){
       if (err) {
-      console.log(err);
+      console.log(err)
     }
     res.send(data)
         
@@ -234,7 +246,7 @@ app.get("/loggings",function(req,res){
 //GET all logs
 app.get("/logging",function(req,res){
     
-     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ORDER BY STR_TO_DATE(datetime,'%d/%m/%Y') DESC",[req.body.startDate,req.body.endDate] ,function(err, data){
+     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ",[req.body.startDate,req.body.endDate] ,function(err, data){
       if (err) {
       console.log(err)
     }
