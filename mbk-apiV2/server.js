@@ -222,7 +222,7 @@ app.delete("/part",function(req,res){
 //GET all logs
 app.get("/loggings",function(req,res){
     
-     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetimeFormat FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) ORDER BY STR_TO_DATE(datetime,'%d/%m/%Y') DESC", function(err, data){
+     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetimeFormat FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) ORDER BY datetime DESC", function(err, data){
       if (err) {
       console.log(err);
     }
