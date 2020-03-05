@@ -222,7 +222,7 @@ app.delete("/part",function(req,res){
 //GET all logs
 app.get("/loggings",function(req,res){
     
-     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) ORDER BY STR_TO_DATE(datetime,'%d/%m/%Y') DESC", function(err, data){
+     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetimeFormat FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) ORDER BY STR_TO_DATE(datetime,'%d/%m/%Y') DESC", function(err, data){
       if (err) {
       console.log(err);
     }
@@ -232,9 +232,9 @@ app.get("/loggings",function(req,res){
    });
 
 //GET all logs
-app.get("/logging",function(req,res){
+app.get("/logging/:startDate/:endDate",function(req,res){
     
-     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ORDER BY STR_TO_DATE(datetime,'%d/%m/%Y') DESC",[req.body.startDate,req.body.endDate] ,function(err, data){
+     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetime FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ORDER BY STR_TO_DATE(datetime,'%d/%m/%Y') DESC",[req.params.startDate,req.params.endDate] ,function(err, data){
       if (err) {
       console.log(err)
     }
@@ -282,8 +282,8 @@ app.post("/logging",function(req,res){
     });
    });
 //DELETE
-app.delete("/logging",function(req,res){
-    pool.query('DELETE FROM log WHERE datetime BETWEEN ? AND ?',[req.body.startDate,req.body.endDate], (error, results) => {
+app.delete("/logging/:startDate/:endDate",function(req,res){
+    pool.query('DELETE FROM log WHERE datetime BETWEEN ? AND ?',[req.params.startDate,req.params.endDate], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       res.send(error)
