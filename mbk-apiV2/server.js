@@ -234,7 +234,7 @@ app.get("/loggings",function(req,res){
 //GET all logs
 app.get("/logging/:startDate/:endDate",function(req,res){
     
-     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetimeFormat FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ORDER BY STR_TO_DATE(datetime,'%d/%m/%Y') DESC",[req.params.startDate,req.params.endDate] ,function(err, data){
+     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetimeFormat FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ORDER BY datetime DESC",[req.params.startDate,req.params.endDate] ,function(err, data){
       if (err) {
       console.log(err)
     }
