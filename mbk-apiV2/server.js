@@ -55,18 +55,18 @@ var pool  = mysql.createPool({
 function keepAlive(){
   console.log("refresh"); 
   http.get("http://137.116.130.1:3000/group", res => {
- res.setEncoding("utf-8");
-  let body = "";
-  res.on("data", data => {
-    body += data;
-  });
-  res.on("end", () => {
-    body = JSON.parse(body);
-    console.log(body);
-  });
+ //res.setEncoding("utf-8");
+ // let body = "";
+ // res.on("data", data => {
+ //   body += data;
+ // });
+ // res.on("end", () => {
+ //   body = JSON.parse(body);
+ //   console.log(body);
+ // });
 });
  }
-setInterval(keepAlive, 6000);
+setInterval(keepAlive, 10000);
 
  
 
@@ -147,7 +147,7 @@ app.get("/group",function(req,res){
 //GET all
 app.get("/parts",function(req,res){
     
-     pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId)", function(err, data){
+     pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId) ORDER BY groupId , name , brand , version ", function(err, data){
       if (err) {
       console.log(err)
     }
