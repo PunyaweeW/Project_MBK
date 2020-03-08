@@ -66,7 +66,7 @@ function keepAlive(){
  // });
 });
  }
-setInterval(keepAlive, 10000);
+setInterval(keepAlive, 220000);
 
  
 
