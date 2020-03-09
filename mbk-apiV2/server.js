@@ -302,7 +302,16 @@ app.delete("/logging/:startDate/:endDate",function(req,res){
     res.send(results);
    });
  });
-
+//DELETE logging by barcode
+app.delete("/logging/deleteByBarcode/:barcode",function(req,res){
+    pool.query('DELETE FROM log WHERE barcode = ?',[req.params.barcode], (error, results) => {
+    if (error) {
+      //response.send("cannot create new log, please check specified barcode")
+      res.send(error)
+    }
+    res.send(results);
+   });
+ });
 
 
 
