@@ -66,7 +66,7 @@ function keepAlive(){
  // });
 });
  }
-setInterval(keepAlive, 600000 );
+setInterval(keepAlive, 700000 );
 
  
 
@@ -230,8 +230,19 @@ app.get("/loggings",function(req,res){
         
     });
    });
+//GET log by barcode
+app.get("/logging/barcode/:barcode",function(req,res){
+    
+     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetimeFormat FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE barcode = ? ORDER BY datetime DESC",[req.params.barcode] ,function(err, data){
+      if (err) {
+      console.log(err)
+    }
+    res.send(data)
+        
+    });
+   });
 
-//GET all logs
+//GET all logs between specified date 
 app.get("/logging/:startDate/:endDate",function(req,res){
     
      pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetimeFormat FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ORDER BY datetime DESC",[req.params.startDate,req.params.endDate] ,function(err, data){
