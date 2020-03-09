@@ -204,9 +204,9 @@ app.post("/part",function(req,res){
   });
    });
 //DELETE
-app.delete("/part",function(req,res){
+app.delete("/part/:barcode",function(req,res){
  
-   pool.query('DELETE FROM part_stock WHERE barcode = ?',req.body.barcode, (error, results) => {
+   pool.query('DELETE FROM part_stock WHERE barcode = ?',req.params.barcode, (error, results) => {
     if (error) {
       res.send(error)
     }
