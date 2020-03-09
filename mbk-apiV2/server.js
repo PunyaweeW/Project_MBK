@@ -110,8 +110,8 @@ function NOW() {
 
     var cur_day = aaaa + "-" + mm + "-" + gg;
 
-    var hours = date.getHours()
-    var minutes = date.getMinutes()
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
     var seconds = date.getSeconds();
 
     if (hours < 10)
@@ -134,8 +134,8 @@ function NOW() {
 app.get("/group",function(req,res){
  
      pool.query("SELECT * from part_group", function(err, data){
-        console.log(data)
-        res.send(data)
+        console.log(data);
+        res.send(data);
     //may be
         //pool.release();
         
@@ -149,9 +149,9 @@ app.get("/parts",function(req,res){
     
      pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId) ORDER BY groupId , name , brand , version ", function(err, data){
       if (err) {
-      console.log(err)
+      console.log(err);
     }
-    res.send(data)
+    res.send(data);
         
     });
    });
@@ -161,9 +161,9 @@ app.get("/part/barcode/:barcode",function(req,res){
      
      pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId) WHERE barcode = ?",req.params.barcode, function(err, data){
           if (err) {
-      console.log(err)
+      console.log(err);
     }
-    res.send(data)
+    res.send(data);
         
     });
    });
@@ -172,45 +172,45 @@ app.get("/part/status/:status",function(req,res){
      
      pool.query("SELECT * FROM part_stock left JOIN part_group using(groupId) WHERE status = ?",req.params.status, function(err, data){
           if (err) {
-      console.log(err)
+      console.log(err);
     }
-    res.send(data)
+    res.send(data);
         
     });
    });
 //PUT//
 app.put("/part",function(req,res){
    var updatePart = new Part(req.body);
-   console.log(updatePart)
+   console.log(updatePart);
     pool.query('UPDATE part_stock SET purchase = ? , price = ? , status = ? , threshold = ? , numberOf = ?, orderNum = ?, sales = ? WHERE barcode = ?;SELECT * FROM part_stock WHERE barcode = ?',[updatePart.purchase,updatePart.price,updatePart.status, updatePart.threshold, updatePart.numberOf,updatePart.orderNum, updatePart.sales ,updatePart.barcode,updatePart.barcode], (error, result) => {
     if (error) {
-      res.send(error)
+      res.send(error);
     }
-    console.log("update",result[1])
-    res.send(result[1])
+    console.log("update",result[1]);
+    res.send(result[1]);
         
     });
    });
  //POST
 app.post("/part",function(req,res){
   var newPart = new Part(req.body);
-  console.log(newPart) 
+  console.log(newPart); 
    pool.query('INSERT INTO part_stock SET ?',newPart, (error, results) => {
     if (error) {
      // response.send("cannot create new part, may be this part is already exist")
-      res.send(error)
+      res.send(error);
     }
     res.send(newPart); 
   });
    });
 //DELETE
-app.delete("/part/:barcode",function(req,res){
+app.delete("/part/delete/barcode/:barcode",function(req,res){
  
    pool.query('DELETE FROM part_stock WHERE barcode = ?',req.params.barcode, (error, results) => {
     if (error) {
-      res.send(error)
+      res.send(error);
     }
-    res.send("deleted complete")
+    res.send(results);
    });
  });
 
@@ -226,7 +226,7 @@ app.get("/loggings",function(req,res){
       if (err) {
       console.log(err);
     }
-    res.send(data)
+    res.send(data);
         
     });
    });
@@ -235,9 +235,9 @@ app.get("/logging/byBarcode/:barcode",function(req,res){
     
     pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetimeFormat FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE barcode = ? ORDER BY datetime DESC",[req.params.barcode] ,function(err, data){
       if (err) {
-      console.log(err)
+      console.log(err);
     }
-    res.send(data)
+    res.send(data);
         
     });
    });
@@ -247,9 +247,9 @@ app.get("/logging/:startDate/:endDate",function(req,res){
     
      pool.query("SELECT * , DATE_FORMAT(datetime,'%d/%m/%Y') as datetimeFormat FROM spareparts.log LEFT JOIN spareparts.action_reference using( actionId ) LEFT JOIN spareparts.part_stock using( barcode) WHERE datetime BETWEEN ? AND ? ORDER BY datetime DESC",[req.params.startDate,req.params.endDate] ,function(err, data){
       if (err) {
-      console.log(err)
+      console.log(err);
     }
-    res.send(data)
+    res.send(data);
         
     });
    });
@@ -259,7 +259,7 @@ app.get("/sales/:startDate/:endDate",function(req,res){
  pool.query('SELECT * FROM part_stock RIGHT JOIN (SELECT  barcode , COUNT(actionId) AS duratSales FROM log WHERE actionId = 20 AND datetime BETWEEN ? AND ? GROUP BY barcode , actionId ORDER BY duratReport DESC ) AS sales using (barcode)',[req.params.startDate,req.params.endDate], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
-      res.send(error)
+      res.send(error);
     }
     res.send(results);
 
@@ -271,7 +271,7 @@ app.get("/report/:reportCode/:startDate/:endDate",function(req,res){
  pool.query('SELECT * FROM part_stock RIGHT JOIN (SELECT  barcode , COUNT(actionId) AS duratReport FROM log WHERE actionId = ? AND datetime BETWEEN ? AND ? GROUP BY barcode , actionId ORDER BY duratReport DESC)  AS sales using (barcode)',[req.params.reportCode,req.params.startDate,req.params.endDate], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
-      res.send(error)
+      res.send(error);
     }
     res.send(results);
 
@@ -282,11 +282,11 @@ app.get("/report/:reportCode/:startDate/:endDate",function(req,res){
 //POST
 app.post("/logging",function(req,res){
  var newLog = new Log(req.body);
-  console.log(newLog) 
+  console.log(newLog); 
    pool.query('INSERT INTO log SET ?',[newLog], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
-      res.send(error)
+      res.send(error);
     }
     res.send(newLog);
         
@@ -297,17 +297,16 @@ app.delete("/logging/:startDate/:endDate",function(req,res){
     pool.query('DELETE FROM log WHERE datetime BETWEEN ? AND ?',[req.params.startDate,req.params.endDate], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
-      res.send(error)
+      res.send(error);
     }
     res.send(results);
    });
  });
 //DELETE logging by barcode
-app.delete("/logging/deleteByBarcode/:barcode",function(req,res){
+app.delete("/logging/delete/barcode/:barcode",function(req,res){
     pool.query('DELETE FROM log WHERE barcode = ?',[req.params.barcode], (error, results) => {
     if (error) {
-      //response.send("cannot create new log, please check specified barcode")
-      res.send(error)
+       res.send(error);
     }
     res.send(results);
    });
@@ -323,7 +322,7 @@ app.delete("/logging/deleteByBarcode/:barcode",function(req,res){
  
 //server running+++++++++++++++++++++++++++++++++++
 console.log('API server started on: ' + port);
-app.listen(process.env.PORT || 3000) 
+app.listen(process.env.PORT || 3000);
 
 
  
