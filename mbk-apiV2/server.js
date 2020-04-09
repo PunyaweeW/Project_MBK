@@ -66,7 +66,11 @@ function keepAlive(){
  // });
 });
  }
+<<<<<<< HEAD
 setInterval(keepAlive, 90000  );
+=======
+setInterval(keepAlive, 90000 );
+>>>>>>> c8caa4e57e254e41ddb5fab1e6617a5d9bca4406
 
  
 
