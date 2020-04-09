@@ -258,7 +258,7 @@ app.get("/logging/:startDate/:endDate",function(req,res){
 
 ///GET SALES
 app.get("/sales/:startDate/:endDate",function(req,res){
- pool.query('SELECT * FROM part_stock RIGHT JOIN (SELECT  barcode , COUNT(actionId) AS duratSales FROM log WHERE actionId = 20 AND datetime BETWEEN ? AND ? GROUP BY barcode , actionId ORDER BY duratReport DESC ) AS sales using (barcode)',[req.params.startDate,req.params.endDate], (error, results) => {
+ pool.query('SELECT * FROM part_stock RIGHT JOIN (SELECT  barcode , SUM(actionNumber) AS  duratSales FROM log WHERE actionId = 20 AND datetime BETWEEN ? AND ? GROUP BY barcode , actionId ORDER BY duratReport DESC ) AS sales using (barcode)',[req.params.startDate,req.params.endDate], (error, results) => {
     if (error) {
       //response.send("cannot create new log, please check specified barcode")
       res.send(error);
