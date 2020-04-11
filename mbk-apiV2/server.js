@@ -54,7 +54,7 @@ var pool  = mysql.createPool({
 //   }, 300000);   
 function keepAlive(){
   console.log("refresh"); 
-  http.get("http://137.116.130.1:3000/group", res => {
+  http.get("http://127.0.0.1:3000/group", res => {
  //res.setEncoding("utf-8");
  // let body = "";
  // res.on("data", data => {
@@ -320,6 +320,27 @@ app.delete("/logging/delete/barcode/:barcode",function(req,res){
 //end of handling section------------------------------------------------
  
  
+ //fetching number of orders and notifications 
+app.get("/ordersNo",function(req,res){
+ 
+     pool.query("SELECT COUNT(*) AS ordersNo from part_stock WHERE status = 200", function(err, data){
+        console.log(data);
+        res.send(data);
+    //may be
+        //pool.release();
+        
+    });
+   });
+app.get("/notificationsNo",function(req,res){
+ 
+     pool.query("SELECT COUNT(*) AS notificationsNo from part_stock WHERE status = 300", function(err, data){
+        console.log(data);
+        res.send(data);
+    //may be
+        //pool.release();
+        
+    });
+   });
 
  
 //server running+++++++++++++++++++++++++++++++++++
